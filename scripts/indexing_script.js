@@ -7,7 +7,7 @@ const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADM
 const index = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
 // Load records from local JSON file
-const records = JSON.parse(fs.readFileSync('data/processed/CH-fr.final.json', 'utf8'));
+const records = JSON.parse(fs.readFileSync('data/processed/CH-it.final.json', 'utf8'));
 
 // Save records to Algolia
 index
