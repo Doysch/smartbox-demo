@@ -55,11 +55,11 @@ const Hit = ({ hit }) => {
   return (
     <div className="bg-white rounded-xl shadow-md p-4 mb-4 w-full max-w-sm">
       <img
-        src={hit["Listing Image"] || "https://via.placeholder.com/300x200"}
-        alt={hit["Web Title"]}
+        src={hit["listingImage"] || "https://via.placeholder.com/300x200"}
+        alt={hit["webTitle"]}
         className="rounded-md mb-2 w-full h-48 object-cover"
       />
-      <h3 className="text-lg font-semibold text-gray-800">{hit["Web Title"]}</h3>
+      <h3 className="text-lg font-semibold text-gray-800">{hit["webTitle"]}</h3>
       <p className="text-sm text-gray-600">{hit["Box Code"]}</p>
     </div>
   );
