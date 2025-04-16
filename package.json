@@ -3,6 +3,7 @@
     "algoliasearch": "^4.24.0",
     "csv-parser": "^3.2.0",
     "dotenv": "^16.5.0",
+    "lodash.camelcase": "^4.3.0",
     "xlsx": "^0.18.5"
   }
 }
