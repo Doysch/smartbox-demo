@@ -50,7 +50,7 @@ index
 function setFacetingSettings(index) {
   return index.setSettings({
     attributesForFaceting: [
-      'categoryPageId',
+      'searchable(categoryPageId)',
       'categories',
       'language',
       'searchable(filters)',
