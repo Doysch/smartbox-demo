@@ -31,11 +31,7 @@ function CustomHits() {
   );
 }
 
-const showMoreTranslations = {
-  showMoreButtonText({ isShowingMore }) {
-    return isShowingMore ? "Voir moins" : "Découvrir plus";
-  },
-};
+
 
 export default function App() {
   return (
@@ -79,19 +75,19 @@ export default function App() {
         </header>
 
         <main className="main-content">
-  <div className="refinement-panel">
-    <RefinementPanel />
-  </div>
+          <div className="refinement-panel">
+            <RefinementPanel />
+          </div>
 
-  <div className="content-area">
-    <div className="hits-container">
-      <CustomHits />
-    </div>
-    <div className="pagination-container">
-      <Pagination />
-    </div>
-  </div>
-</main>
+          <div className="content-area">
+            <div className="hits-container">
+              <CustomHits />
+            </div>
+            <div className="pagination-container">
+              <Pagination />
+            </div>
+          </div>
+        </main>
 
         <Configure hitsPerPage={12} />
       </InstantSearch>
