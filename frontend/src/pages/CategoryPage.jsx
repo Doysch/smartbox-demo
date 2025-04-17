@@ -1,21 +1,19 @@
-import React from "react";
-import { algoliasearch } from "algoliasearch";
 import {
   InstantSearch,
   SearchBox,
   Configure,
   Pagination,
 } from "react-instantsearch";
-import "./App.css";
-import smartboxLogo from "./images/smartbox-logo.png";
+import { useParams } from "react-router-dom";
+import { algoliasearch } from "algoliasearch";
+import RefinementPanel from "../components/RefinementPanel";
+import Hit from "../components/Hit";
 import { useHits } from "react-instantsearch";
-import Hit from "./components/Hit";
-import RefinementPanel from "./components/RefinementPanel";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CategoryPage from './pages/CategoryPage';
-import CategoryDropdown from './components/CategoryDropdown';
-import OccasionsDropdown from "./components/OccasionsDropdown";
+import smartboxLogo from "../images/smartbox-logo.png";
 import { Link } from "react-router-dom";
+import OccasionsDropdown from "../components/OccasionsDropdown";
+import CategoryDropdown from "../components/CategoryDropdown";
+import "../App.css";
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -36,9 +34,10 @@ function CustomHits() {
   );
 }
 
+export default function CategoryPage() {
+  const { categoryId } = useParams();
+  const decodedCategory = decodeURIComponent(categoryId);
 
-
-export default function App() {
   return (
     <div className="app-container">
       <InstantSearch
@@ -48,10 +47,9 @@ export default function App() {
       >
         <header className="search-header">
           <Link to="/" className="logo">
-          
             <img src={smartboxLogo} alt="Smartbox Logo" />
           </Link>
-    
+
           <div className="search-wrapper">
             <SearchBox
               placeholder="2 nuits, Parachute, Insolite ..."
@@ -63,7 +61,6 @@ export default function App() {
               }}
             />
           </div>
-          
 
           <div className="nav-icons">
             <div className="nav-item">
@@ -85,22 +82,22 @@ export default function App() {
   <CategoryDropdown />
   <OccasionsDropdown />
 </div>
+
         <main className="main-content">
           <div className="refinement-panel">
             <RefinementPanel />
           </div>
-
           <div className="content-area">
-            <div className="hits-container">
-              <CustomHits />
-            </div>
+            <CustomHits />
             <div className="pagination-container">
               <Pagination />
             </div>
           </div>
         </main>
-
-        <Configure hitsPerPage={12} />
+        <Configure
+          hitsPerPage={12}
+          filters={`filters.experiences:"${decodedCategory}"`}
+        />{" "}
       </InstantSearch>
     </div>
   );
