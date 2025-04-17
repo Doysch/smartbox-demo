@@ -11,6 +11,9 @@ import smartboxLogo from "./images/smartbox-logo.png";
 import { useHits } from "react-instantsearch";
 import Hit from "./components/Hit";
 import RefinementPanel from "./components/RefinementPanel";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CategoryPage from './pages/CategoryPage';
+import CategoryDropdown from './components/CategoryDropdown';
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -57,6 +60,7 @@ export default function App() {
               }}
             />
           </div>
+          
 
           <div className="nav-icons">
             <div className="nav-item">
@@ -74,6 +78,7 @@ export default function App() {
           </div>
         </header>
 
+          <CategoryDropdown />
         <main className="main-content">
           <div className="refinement-panel">
             <RefinementPanel />
