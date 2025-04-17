@@ -1,11 +1,16 @@
 import React from "react";
 import { algoliasearch } from "algoliasearch";
-import { InstantSearch, SearchBox, Hits, Configure } from "react-instantsearch";
+import {
+  InstantSearch,
+  SearchBox,
+  Configure,
+  Pagination,
+} from "react-instantsearch";
 import "./App.css";
 import smartboxLogo from "./images/smartbox-logo.png";
-import { Star, Users, MapPin, Truck, Tag } from "lucide-react";
 import { useHits } from "react-instantsearch";
-import Hit from './components/Hit';
+import Hit from "./components/Hit";
+import RefinementPanel from "./components/RefinementPanel";
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -25,6 +30,12 @@ function CustomHits() {
     </div>
   );
 }
+
+const showMoreTranslations = {
+  showMoreButtonText({ isShowingMore }) {
+    return isShowingMore ? "Voir moins" : "Découvrir plus";
+  },
+};
 
 export default function App() {
   return (
@@ -67,14 +78,23 @@ export default function App() {
           </div>
         </header>
 
-        <main className="hits-container">
-          <CustomHits />
-        </main>
+        <main className="main-content">
+  <div className="refinement-panel">
+    <RefinementPanel />
+  </div>
+
+  <div className="content-area">
+    <div className="hits-container">
+      <CustomHits />
+    </div>
+    <div className="pagination-container">
+      <Pagination />
+    </div>
+  </div>
+</main>
 
         <Configure hitsPerPage={12} />
       </InstantSearch>
     </div>
   );
 }
-
-
