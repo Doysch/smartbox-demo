@@ -1,11 +1,19 @@
-import { InstantSearch, SearchBox, Configure, Pagination } from 'react-instantsearch';
-import { useParams } from 'react-router-dom';
+import {
+  InstantSearch,
+  SearchBox,
+  Configure,
+  Pagination,
+} from "react-instantsearch";
+import { useParams } from "react-router-dom";
 import { algoliasearch } from "algoliasearch";
-import RefinementPanel from '../components/RefinementPanel';
-import Hit from '../components/Hit';
-import { useHits } from 'react-instantsearch';
-import smartboxLogo from '../images/smartbox-logo.png';
-
+import RefinementPanel from "../components/RefinementPanel";
+import Hit from "../components/Hit";
+import { useHits } from "react-instantsearch";
+import smartboxLogo from "../images/smartbox-logo.png";
+import { Link } from "react-router-dom";
+import OccasionsDropdown from "../components/OccasionsDropdown";
+import CategoryDropdown from "../components/CategoryDropdown";
+import "../App.css";
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -37,40 +45,44 @@ export default function CategoryPage() {
         indexName={indexName}
         future={{ preserveSharedStateOnUnmount: true }}
       >
+        <header className="search-header">
+          <Link to="/" className="logo">
+            <img src={smartboxLogo} alt="Smartbox Logo" />
+          </Link>
 
-         <header className="search-header">
-                  <div className="logo">
-                    <img src={smartboxLogo} alt="Smartbox Logo" />
-                  </div>
-        
-                  <div className="search-wrapper">
-                    <SearchBox
-                      placeholder="2 nuits, Parachute, Insolite ..."
-                      classNames={{
-                        root: "searchbox-root",
-                        input: "searchbox-input",
-                        submit: "searchbox-submit",
-                        reset: "searchbox-reset",
-                      }}
-                    />
-                  </div>
-                  
-        
-                  <div className="nav-icons">
-                    <div className="nav-item">
-                      <span className="icon">🎟️</span>
-                      <span>Enregistrez</span>
-                    </div>
-                    <div className="nav-item">
-                      <span className="icon">👤</span>
-                      <span>Me connecter</span>
-                    </div>
-                    <div className="nav-item">
-                      <span className="icon">🛒</span>
-                      <span>Panier</span>
-                    </div>
-                  </div>
-                </header>
+          <div className="search-wrapper">
+            <SearchBox
+              placeholder="2 nuits, Parachute, Insolite ..."
+              classNames={{
+                root: "searchbox-root",
+                input: "searchbox-input",
+                submit: "searchbox-submit",
+                reset: "searchbox-reset",
+              }}
+            />
+          </div>
+
+          <div className="nav-icons">
+            <div className="nav-item">
+              <span className="icon">🎟️</span>
+              <span>Enregistrez</span>
+            </div>
+            <div className="nav-item">
+              <span className="icon">👤</span>
+              <span>Me connecter</span>
+            </div>
+            <div className="nav-item">
+              <span className="icon">🛒</span>
+              <span>Panier</span>
+            </div>
+          </div>
+        </header>
+
+        <div className="dropdowns-row">
+  <CategoryDropdown />
+  <OccasionsDropdown />
+</div>
+
         <main className="main-content">
           <div className="refinement-panel">
             <RefinementPanel />
@@ -82,8 +94,11 @@ export default function CategoryPage() {
             </div>
           </div>
         </main>
-
-        <Configure hitsPerPage={12} filters={`filters.experiences:"${decodedCategory}"`} />      </InstantSearch>
+        <Configure
+          hitsPerPage={12}
+          filters={`filters.experiences:"${decodedCategory}"`}
+        />{" "}
+      </InstantSearch>
     </div>
   );
 }
