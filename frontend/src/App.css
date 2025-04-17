@@ -236,3 +236,168 @@ body {
   all: unset;
   display: block;
 }
+
+/* Refinements */
+
+.main-content {
+  display: flex;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  gap: 2rem;
+}
+
+/* Panel layout */
+.refinement-panel {
+  flex: 0 0 250px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Headings */
+.refinement-panel h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Algolia refinement list root */
+.ais-RefinementList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+/* Refinement item container */
+.ais-RefinementList-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-size: 0.95rem;
+}
+
+/* Checkbox styling */
+.ais-RefinementList-checkbox {
+  margin-right: 0.5rem;
+}
+
+/* Label without bullets */
+.ais-RefinementList-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex: 1;
+}
+
+/* Facet label text */
+.ais-RefinementList-labelText {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Facet count */
+.ais-RefinementList-count {
+  color: #666;
+  font-weight: normal;
+  margin-left: auto;
+  padding-left: 0.5rem;
+}
+.ais-RefinementList-showMore {
+  background: none;
+  border: none;
+  color: #d23f3f; /* Smartbox red */
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  padding: 0;
+  text-align: left;
+}
+
+.ais-RefinementList-showMore:hover {
+  text-decoration: underline;
+}
+
+.ais-CurrentRefinements {
+  margin-bottom: 1rem;
+}
+
+.ais-CurrentRefinements-item {
+  display: inline-flex;
+  align-items: center;
+  background: #f3f3f3;
+  border-radius: 16px;
+  padding: 0.25rem 0.75rem;
+  margin: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.ais-CurrentRefinements-label {
+  margin-right: 0.5rem;
+  font-weight: 500;
+}
+
+.ais-CurrentRefinements-delete {
+  background: none;
+  border: none;
+  color: #d23f3f;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Pagination */
+
+.pagination-container {
+  margin: 2rem auto;
+  max-width: 1200px;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.ais-Pagination {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ais-Pagination-link {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.ais-Pagination-item--selected .ais-Pagination-link {
+  background-color: #f0543c;
+  color: #fff;
+  border-color: #f0543c;
+}
+
+.ais-Pagination-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ais-Pagination-link:hover {
+  background-color: #f7f7f7;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
