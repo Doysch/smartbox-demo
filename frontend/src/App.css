@@ -1,42 +1,238 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* App.css - plain CSS styling for clean search layout */
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #ffffff;
+  color: #333;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header layout: logo, search, nav */
+.search-header {
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.logo img {
+  height: 40px;
+}
+
+/* Centered search */
+.search-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.searchbox-root {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+}
+
+.searchbox-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.searchbox-submit {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #f0543c;
+  cursor: pointer;
+}
+
+.searchbox-reset {
+  display: none;
+}
+
+/* Nav icons */
+.nav-icons {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.85rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.icon {
+  font-size: 1.2rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Grid layout for hits */
+.hits-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1rem;
+  justify-content: center; /* ✅ CENTER the grid */
+  text-align: initial;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.hit-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease;
+  height: 100%;               /* NEW: ensures consistent card sizing */
+}
+.hit-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.hit-card:active {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+.hit-card:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(240, 84, 60, 0.5);
+}
+.hit-card:focus-visible {
+  box-shadow: 0 0 0 4px rgba(240, 84, 60, 0.5);
 }
 
-.card {
-  padding: 2em;
+
+
+
+.hit-card:hover {
+  transform: translateY(-2px);
 }
 
-.read-the-docs {
-  color: #888;
+.hit-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  background-size: cover;
+  background-position: center;
+}
+
+.hit-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.hit-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.hit-subtext {
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* New styles for rating section */
+.hit-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.hit-rating svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hit-rating-count {
+  font-size: 0.85rem;
+  color: #666;
+  margin-left: 0.5rem;
+}
+
+/* Meta info (users, location, etc) */
+.hit-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.hit-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.hit-meta-item.people-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem; /* spacing between icon and text */
+  white-space: nowrap; /* prevents breaking onto new line */
+}
+
+.hit-meta-item.people-icon span {
+  display: -webkit-box;
+  display: box; /* fallback for older specs */
+  -webkit-box-orient: vertical;
+  box-orient: vertical;
+  overflow: hidden;
+
+  /* NEW: standard & prefixed line clamping */
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+
+  /* Optional: if you want to prevent word-breaking mid-word */
+  word-break: break-word;
+}
+
+/* Discount section */
+
+
+/* Price */
+.hit-price {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: auto;
+  color: #222;
+}
+
+.ais-Hits-list {
+  all: unset;
+  display: contents;
+}
+
+.ais-Hits-item {
+  all: unset;
+  display: block;
 }
