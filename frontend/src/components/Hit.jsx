@@ -1,8 +1,8 @@
 // src/components/Hit.jsx
-import React from 'react';
-import { Star, Users, MapPin, Truck, Tag } from "lucide-react";
+import React from "react";
+import { Star } from "lucide-react";
 
-const Hit = ({ hit }) => {
+const Hit = ({ hit, onBoxClick }) => {
   const rating = hit.average_rating;
   const reviews = hit.review_count;
   const imageUrl = hit.listingImage;
@@ -20,7 +20,12 @@ const Hit = ({ hit }) => {
   const activityText = experienceMeta || "1 activité pour 1 ou 2 personnes";
 
   return (
-    <div className="hit-card">
+    <div className="hit-card"
+    onClick={() => onBoxClick?.(hit)} // 👈 Trigger modal if callback exists
+    role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === "Enter" && onBoxClick?.(hit)} // 👈 A11y
+>
       <div
         className="hit-image-wrapper"
         style={{ backgroundImage: `url(${imageUrl || hit.lengowImage || ""})` }}
@@ -31,14 +36,47 @@ const Hit = ({ hit }) => {
         {/* Rating stars and count */}
         {rating && (
           <div className="hit-rating">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star
-                key={i}
-                size={16}
-                color={i < Math.round(rating) ? "#f7b500" : "#ccc"}
-                fill={i < Math.round(rating) ? "#f7b500" : "none"}
-              />
-            ))}
+            {Array.from({ length: 5 }).map((_, i) => {
+              const diff = rating - i;
+
+              if (diff >= 0.75) {
+                // Full star
+                return (
+                  <Star key={i} size={16} color="#f7b500" fill="#f7b500" />
+                );
+              } else if (diff >= 0.25) {
+                // Half star
+                return (
+                  <svg key={i} width="16" height="16" viewBox="0 0 24 24">
+                    <defs>
+                      <linearGradient id={`half-grad-${i}`}>
+                        <stop offset="50%" stopColor="#f7b500" />
+                        <stop offset="50%" stopColor="#fff" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      fill={`url(#half-grad-${i})`}
+                      stroke="#ccc"
+                      strokeWidth="1"
+                      d="M12 .587l3.668 7.431 8.2 1.191-5.934 5.782 
+                 1.4 8.175L12 18.897l-7.334 3.869 
+                 1.4-8.175L.132 9.209l8.2-1.191z"
+                    />
+                  </svg>
+                );
+              } else {
+                // Empty star
+                return (
+                  <Star
+                    key={i}
+                    size={16}
+                    color="#fff"
+                    stroke="#ccc"
+                    fill="none"
+                  />
+                );
+              }
+            })}
             <span className="hit-rating-count">{reviews}</span>
           </div>
         )}

@@ -10,10 +10,11 @@ import "./App.css";
 import smartboxLogo from "./images/smartbox-logo.png";
 import { useHits } from "react-instantsearch";
 import Hit from "./components/Hit";
+import BoxModal from "./components/BoxModal";
 import RefinementPanel from "./components/RefinementPanel";
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ExperiencePage from './pages/ExperiencePage';
-import ExperienceDropdown from './components/ExperienceDropdown';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ExperiencePage from "./pages/ExperiencePage";
+import ExperienceDropdown from "./components/ExperienceDropdown";
 import OccasionsDropdown from "./components/OccasionsDropdown";
 import { Link } from "react-router-dom";
 import DestinationsDropdown from "./components/DestinationsDropdown";
@@ -29,20 +30,29 @@ const indexName = import.meta.env.VITE_ALGOLIA_INDEX_NAME;
 
 function CustomHits() {
   const { hits } = useHits();
+  const [selectedBox, setSelectedBox] = useState(null);
+
+  const handleBoxClick = (box) => {
+    setSelectedBox(box);
+  };
+
+  const closeModal = () => setSelectedBox(null);
 
   return (
+    <>
     <div className="hits-container">
       {hits.map((hit) => (
-        <Hit key={hit.objectID} hit={hit} />
+        <Hit key={hit.objectID} hit={hit} onBoxClick={handleBoxClick} />
       ))}
     </div>
+    
+    <BoxModal box={selectedBox} onClose={closeModal} />
+    </>
+
   );
 }
 
-
-
 export default function App() {
-
   const [persona, setPersona] = useState("");
 
   const handlePersonaChange = (selectedPersona) => {
@@ -51,9 +61,9 @@ export default function App() {
 
   const personaToFilterMap = {
     "Thrill Seeker": "Adventure",
-    "Foodie": "Gastronomy",
+    Foodie: "Gastronomy",
     "Wellness Seeker": "Stay Wellness",
-    "Family": "Family",
+    Stay: "Stay",
   };
   return (
     <div className="app-container">
@@ -64,10 +74,9 @@ export default function App() {
       >
         <header className="search-header">
           <Link to="/" className="logo">
-          
             <img src={smartboxLogo} alt="Smartbox Logo" />
           </Link>
-    
+
           <div className="search-wrapper">
             <SearchBox
               placeholder="2 nuits, Parachute, Insolite ..."
@@ -79,7 +88,7 @@ export default function App() {
               }}
             />
           </div>
-          
+
           <PersonaDropdown onChange={handlePersonaChange} />
           <div className="nav-icons">
             <div className="nav-item">
@@ -98,12 +107,11 @@ export default function App() {
         </header>
 
         <div className="dropdowns-row">
-        <CategoryDropdown/>
-        <ExperienceDropdown />
-  <OccasionsDropdown />
-  <DestinationsDropdown/>
-  
-</div>
+          <CategoryDropdown />
+          <ExperienceDropdown />
+          <OccasionsDropdown />
+          <DestinationsDropdown />
+        </div>
         <main className="main-content">
           <div className="refinement-panel">
             <RefinementPanel />
@@ -119,9 +127,16 @@ export default function App() {
           </div>
         </main>
 
-        <Configure hitsPerPage={12} optionalFilters={
-            persona ? [`categories.lvl0:${personaToFilterMap[persona]}`] : undefined }
-         />
+        <Configure
+          hitsPerPage={12}
+          personalizationFilters={
+            persona
+              ? [`categories.lvl0:${personaToFilterMap[persona]}`]
+              : undefined
+          }
+          enablePersonalization={true}
+          personalizationImpact={95}
+        />
       </InstantSearch>
     </div>
   );
