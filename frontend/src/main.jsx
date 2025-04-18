@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.jsx';
 import CategoryPage from './pages/CategoryPage.jsx'; 
 import OccasionPage from './pages/OccasionPage.jsx';
+import DestinationPage from './pages/DestinationPage.jsx';
+import ExperiencePage from './pages/ExperiencePage.jsx';
 import './App.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -11,8 +13,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/experiences/:categoryId" element={<CategoryPage />} />
+        <Route path="/experiences/:categoryId" element={<ExperiencePage />} />
         <Route path="/occasions/:occasionId" element={<OccasionPage />} />
+        <Route path="/destinations/:destinationId" element={<DestinationPage />} />
+        <Route path="/categories/:categoryId" element={<CategoryPage />} />
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
