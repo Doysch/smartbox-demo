@@ -1,39 +1,42 @@
-import { useState } from 'react';
+// src/components/CategoryDropdown.jsx
+
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import { useRef } from 'react';
 import useClickOutside from '../hooks/useClickOutside';
 
 const categories = [
-  "Séjours",
-  "Expériences européennes",
-  "Loisirs et sorties",
-  "Sport & aventure",
-  "Gastronomie",
-];
+    { value: "Stay", label: "Séjour" },
+    { value: "Adventure", label: "Aventure" },
+    { value: "Multi-thematic", label: "Multi-thématique" },
+    { value: "Gastronomy", label: "Gastronomie" },
+    { value: "Stay Wellness", label: "Bien-être" },
+  ];
 
 export default function CategoryDropdown() {
   const [open, setOpen] = useState(false);
-
   const dropdownRef = useRef();
-useClickOutside(dropdownRef, () => setOpen(false));
+  useClickOutside(dropdownRef, () => setOpen(false));
 
   return (
     <div className="category-dropdown-wrapper" ref={dropdownRef}>
       <button className="dropdown-toggle" onClick={() => setOpen(!open)}>
-        Expériences ▾
+        Catégories ▾
       </button>
 
       {open && (
         <ul className="category-dropdown-menu">
-          {categories.map((cat) => (
-            <li key={cat}>
-              <Link to={`/experiences/${encodeURIComponent(cat)}`} className="category-link">
-                {cat}
-              </Link>
-              
-            </li>
-          ))}
+          {categories.map(({ value, label }) => (
+  <li key={value}>
+    <Link
+  to={`/categories/${encodeURIComponent(value)}`}
+  className="category-link"
+  onClick={() => setOpen(false)} // <- this will ensure it closes
+>
+  {label}
+</Link>
+  </li>
+))}
         </ul>
       )}
     </div>
