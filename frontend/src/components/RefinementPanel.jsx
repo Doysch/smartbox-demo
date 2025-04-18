@@ -18,6 +18,17 @@ const refinementLabelMap = {
   'filters.pourQui': 'Pour qui',
 };
 
+const categoryTranslations = {
+    "Adventure": "Aventure",
+    "Stay": "Séjour",
+    "Multi-thematic": "Multi-thématique",
+    "Gastronomy": "Gastronomie",
+    "Stay Wellness": "Séjour Bien-être",
+    "OVP": "Offres variées",
+    "Stay Gastronomy": "Séjour Gastronomique",
+    "Wellness": "Bien-être",
+  };
+
 export default function RefinementPanel() {
   return (
     <aside className="refinement-panel">
@@ -37,6 +48,12 @@ export default function RefinementPanel() {
           limit={5}
           showMore
           translations={showMoreTranslations}
+          transformItems={(items) =>
+            items.map((item) => ({
+              ...item,
+              label: categoryTranslations[item.label] || item.label,
+            }))
+          }
         />
       </div>
 
