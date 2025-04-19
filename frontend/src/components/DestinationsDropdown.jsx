@@ -21,7 +21,7 @@ export default function DestinationsDropdown() {
   return (
     <div className="category-dropdown-wrapper" ref={dropdownRef}>
       <button className="dropdown-toggle" onClick={() => setOpen(!open)}>
-        Parcourir les destinations ▾
+        Destinations ▾
       </button>
 
       {open && (
