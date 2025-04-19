@@ -3,6 +3,7 @@ import {
   SearchBox,
   Configure,
   Pagination,
+  Stats,
 } from "react-instantsearch";
 import { useParams } from "react-router-dom";
 import { algoliasearch } from "algoliasearch";
@@ -80,16 +81,27 @@ export default function OccasionPage() {
           </div>
         </header>
         <div className="dropdowns-row">
-          <CategoryDropdown/>
-                  <ExperienceDropdown />
-            <OccasionsDropdown />
-            <DestinationsDropdown/>
+          <CategoryDropdown />
+          <ExperienceDropdown />
+          <OccasionsDropdown />
+          <DestinationsDropdown />
         </div>
         <main className="main-content">
           <div className="refinement-panel">
             <RefinementPanel />
           </div>
           <div className="content-area">
+            <div className="stats-wrapper">
+              <Stats
+                translations={{
+                  rootElementText({ nbHits, processingTimeMS }) {
+                    return `Résultats ${nbHits.toLocaleString(
+                      "fr-FR"
+                    )} trouvés en ${processingTimeMS}ms`;
+                  },
+                }}
+              />
+            </div>
             <CustomHits />
             <div className="pagination-container">
               <Pagination />
