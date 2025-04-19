@@ -116,10 +116,7 @@ export default function App() {
 
           <PersonaDropdown onChange={handlePersonaChange} />
           <div className="nav-icons">
-            <div className="nav-item">
-              <span className="icon">🎟️</span>
-              <span>Enregistrez</span>
-            </div>
+            
             <div className="nav-item">
               <span className="icon">👤</span>
               <span>Me connecter</span>
