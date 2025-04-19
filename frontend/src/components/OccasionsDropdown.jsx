@@ -22,7 +22,7 @@ useClickOutside(dropdownRef, () => setOpen(false));
   return (
     <div className="category-dropdown-wrapper" ref={dropdownRef}>
       <button className="dropdown-toggle" onClick={() => setOpen(!open)}>
-        Parcourir les occasions ▾
+        Occasions ▾
       </button>
 
       {open && (

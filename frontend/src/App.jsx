@@ -5,6 +5,7 @@ import {
   SearchBox,
   Configure,
   Pagination,
+  Stats,
 } from "react-instantsearch";
 import "./App.css";
 import smartboxLogo from "./images/smartbox-logo.png";
@@ -20,6 +21,7 @@ import { Link } from "react-router-dom";
 import DestinationsDropdown from "./components/DestinationsDropdown";
 import CategoryDropdown from "./components/CategoryDropdown";
 import PersonaDropdown from "./components/PersonaDropdown";
+import PlatformDropdown from "./components/PlatformDropdown";
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -30,6 +32,18 @@ const indexName = import.meta.env.VITE_ALGOLIA_INDEX_NAME;
 
 const recommendClient = searchClient.initRecommend();
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isMobile;
+}
+
 function CustomHits() {
   const { hits } = useHits();
   const [selectedBox, setSelectedBox] = useState(null);
@@ -39,6 +53,8 @@ function CustomHits() {
   };
 
   const closeModal = () => setSelectedBox(null);
+
+  // PLatform Check
 
   return (
     <>
@@ -55,9 +71,16 @@ function CustomHits() {
 
 export default function App() {
   const [persona, setPersona] = useState("");
+  const [platform, setPlatform] = useState("");
+  const isMobile = useIsMobile();
+  const [showFilters, setShowFilters] = useState(() => !isMobile);
 
   const handlePersonaChange = (selectedPersona) => {
     setPersona(selectedPersona);
+  };
+
+  const handlePlatformChange = (selectedPlatform) => {
+    setPlatform(selectedPlatform);
   };
 
   const personaToFilterMap = {
@@ -106,6 +129,7 @@ export default function App() {
               <span>Panier</span>
             </div>
           </div>
+          <PlatformDropdown onChange={handlePlatformChange} />
         </header>
 
         <div className="dropdowns-row">
@@ -115,17 +139,43 @@ export default function App() {
           <DestinationsDropdown />
         </div>
         <main className="main-content">
-          <div className="refinement-panel">
-            <RefinementPanel />
-          </div>
+          {isMobile ? (
+            <div className="refinement-toggle-wrapper">
+              <button
+                className="toggle-filters-btn"
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                {showFilters ? "Masquer les filtres" : "Afficher les filtres"}
+              </button>
+              {showFilters && (
+                <div className="refinement-panel">
+                  <RefinementPanel />
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="refinement-panel">
+              <RefinementPanel />
+            </div>
+          )}
 
           <div className="content-area">
+            <div className="stats-wrapper">
+              <Stats
+                translations={{
+                  rootElementText({ nbHits, processingTimeMS }) {
+                    return `Résultats ${nbHits.toLocaleString(
+                      "fr-FR"
+                    )} trouvés en ${processingTimeMS}ms`;
+                  },
+                }}
+              />
+            </div>
             <div className="hits-container">
               <CustomHits />
             </div>
             <div className="pagination-container">
               <Pagination />
-             
             </div>
           </div>
         </main>
@@ -139,6 +189,7 @@ export default function App() {
           }
           enablePersonalization={true}
           personalizationImpact={95}
+          ruleContexts={platform ? [`platform-${platform}`] : []}
         />
       </InstantSearch>
     </div>
