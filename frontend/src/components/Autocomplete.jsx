@@ -55,6 +55,10 @@ export default function Autocomplete({ onSearchSubmit }) {
                 return html`<div>${item.label}</div>`;
               },
             },
+            onSelect({ item, setIsOpen }) {
+                onSearchSubmit(item.label);
+                setIsOpen(false);
+              },
           },
           {
             sourceId: "querySuggestions",
@@ -83,7 +87,10 @@ export default function Autocomplete({ onSearchSubmit }) {
                 return item.query;
               },
             },
-            section: "left",
+            onSelect({ item, setIsOpen }) {
+                onSearchSubmit(item.query);
+                setIsOpen(false); // Optional: close the dropdown
+              },
           },
           {
             sourceId: "boxes",
