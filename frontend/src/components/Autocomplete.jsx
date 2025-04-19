@@ -16,7 +16,7 @@ const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
   limit: 3,
 });
 
-export default function Autocomplete({ onSearchSubmit }) {
+export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -27,16 +27,22 @@ export default function Autocomplete({ onSearchSubmit }) {
       plugins: [],
       placeholder: "Recherchez une expérience...",
       openOnFocus: true,
+      initialState: { query: initialQuery }, 
       classNames: {
         panel: "aa-Panel two-column-panel",
       },
       onSubmit({ state }) {
         const query = state.query?.trim();
-        if (query) {
+        if (query !== undefined) {
           recentSearchesPlugin.data.addItem({ label: query });
           onSearchSubmit(query);
         }
       },
+       // ✅ Fires when clicking ❌ (clear)
+  onReset() {
+    onSearchSubmit("");
+  },
+      
       getSources({ query }) {
         return [
           {
@@ -55,6 +61,10 @@ export default function Autocomplete({ onSearchSubmit }) {
                 return html`<div>${item.label}</div>`;
               },
             },
+            onSelect({ item, setIsOpen }) {
+                onSearchSubmit(item.label);
+                setIsOpen(false);
+              },
           },
           {
             sourceId: "querySuggestions",
@@ -83,7 +93,10 @@ export default function Autocomplete({ onSearchSubmit }) {
                 return item.query;
               },
             },
-            section: "left",
+            onSelect({ item, setIsOpen }) {
+                onSearchSubmit(item.query);
+                setIsOpen(false); // Optional: close the dropdown
+              },
           },
           {
             sourceId: "boxes",
@@ -133,7 +146,7 @@ export default function Autocomplete({ onSearchSubmit }) {
     });
 
     return () => instance.destroy();
-  }, [onSearchSubmit]);
+  }, [onSearchSubmit, initialQuery]);
 
   return (
     <div
