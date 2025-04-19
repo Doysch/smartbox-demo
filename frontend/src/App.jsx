@@ -1,5 +1,5 @@
 // App.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { algoliasearch } from "algoliasearch";
 import {
   InstantSearch,
@@ -23,7 +23,7 @@ import PlatformDropdown from "./components/PlatformDropdown";
 import { history } from "instantsearch.js/es/lib/routers";
 import { singleIndex } from "instantsearch.js/es/lib/stateMappings";
 import SearchWrapper from "./components/SearchWrapper";
-import { connectSearchBox } from 'instantsearch.js/es/connectors';
+import { connectSearchBox } from "instantsearch.js/es/connectors";
 const VirtualSearchBoxWidget = connectSearchBox(() => null);
 
 const searchClient = algoliasearch(
@@ -63,12 +63,19 @@ export default function App() {
   const [platform, setPlatform] = useState("");
   const isMobile = useIsMobile();
   const [showFilters, setShowFilters] = useState(() => !isMobile);
+  const logoClickHandlerRef = useRef(null);
 
   const personaToFilterMap = {
     "Thrill Seeker": "Adventure",
     Foodie: "Gastronomy",
     "Wellness Seeker": "Stay Wellness",
     Stay: "Stay",
+  };
+
+  const handleLogoClick = () => {
+    if (logoClickHandlerRef.current) {
+      logoClickHandlerRef.current(); // Reset the query
+    }
   };
 
   return (
@@ -78,18 +85,23 @@ export default function App() {
         indexName={indexName}
         routing={{ router: history(), stateMapping: singleIndex(indexName) }}
       >
-
-
         <header className="search-header">
-          
-          <Link to="/" className="logo">
-            <img src={smartboxLogo} alt="Smartbox Logo" />
-          </Link>
-          <SearchWrapper />
+        <Link to="/" className="logo" onClick={handleLogoClick}>
+  <img src={smartboxLogo} alt="Smartbox Logo" />
+</Link>
+          <SearchWrapper
+            onLogoClick={(cb) => (logoClickHandlerRef.current = cb)}
+          />
           <PersonaDropdown onChange={setPersona} />
           <div className="nav-icons">
-            <div className="nav-item"><span className="icon">👤</span><span>Me connecter</span></div>
-            <div className="nav-item"><span className="icon">🛒</span><span>Panier</span></div>
+            <div className="nav-item">
+              <span className="icon">👤</span>
+              <span>Me connecter</span>
+            </div>
+            <div className="nav-item">
+              <span className="icon">🛒</span>
+              <span>Panier</span>
+            </div>
           </div>
           <PlatformDropdown onChange={setPlatform} />
         </header>
@@ -109,12 +121,20 @@ export default function App() {
               </button>
               {showFilters && <RefinementPanel />}
             </div>
-          ) : <RefinementPanel />}
+          ) : (
+            <RefinementPanel />
+          )}
 
           <div className="content-area">
-            <Stats translations={{ rootElementText({ nbHits, processingTimeMS }) {
-              return `Résultats ${nbHits.toLocaleString("fr-FR")}, trouvés en ${processingTimeMS}ms`;
-            }}} />
+            <Stats
+              translations={{
+                rootElementText({ nbHits, processingTimeMS }) {
+                  return `Résultats ${nbHits.toLocaleString(
+                    "fr-FR"
+                  )}, trouvés en ${processingTimeMS}ms`;
+                },
+              }}
+            />
             <CustomHits />
             <Pagination />
           </div>
@@ -124,7 +144,11 @@ export default function App() {
           hitsPerPage={12}
           enablePersonalization
           personalizationImpact={95}
-          personalizationFilters={persona ? [`categories.lvl0:${personaToFilterMap[persona]}`] : undefined}
+          personalizationFilters={
+            persona
+              ? [`categories.lvl0:${personaToFilterMap[persona]}`]
+              : undefined
+          }
           ruleContexts={platform ? [`platform-${platform}`] : []}
         />
       </InstantSearch>

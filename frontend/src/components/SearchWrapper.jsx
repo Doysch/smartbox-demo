@@ -8,28 +8,40 @@ function VirtualSearchBox() {
   return null;
 }
 
-export default function SearchWrapper() {
-  const { uiState, setUiState } = useInstantSearch();
+export default function SearchWrapper({ onLogoClick }) {
+  const { setUiState } = useInstantSearch();
 
   const handleSearchSubmit = (query) => {
-    if (!query) return;
-    setUiState((prevUiState) => ({
-      ...prevUiState,
+    setUiState((uiState) => ({
+      ...uiState,
       "smartbox_boxes_CH-fr": {
-        ...prevUiState["smartbox_boxes_CH-fr"],
+        ...uiState["smartbox_boxes_CH-fr"],
         query,
       },
     }));
   };
 
-  // ✅ Define the current query value from the UI state
-  const indexId = "smartbox_boxes_CH-fr";
-  const currentQuery = uiState?.[indexId]?.query || "";
+  const handleResetQuery = () => {
+    setUiState((uiState) => ({
+      ...uiState,
+      "smartbox_boxes_CH-fr": {
+        ...uiState["smartbox_boxes_CH-fr"],
+        query: "",
+      },
+    }));
+  };
+
+  // Notify parent when logo is clicked
+  React.useEffect(() => {
+    if (onLogoClick) {
+      onLogoClick(() => handleResetQuery());
+    }
+  }, [onLogoClick]);
 
   return (
     <>
       <VirtualSearchBox />
-      <Autocomplete onSearchSubmit={handleSearchSubmit} initialQuery={currentQuery} />
+      <Autocomplete onSearchSubmit={handleSearchSubmit} />
     </>
   );
 }
