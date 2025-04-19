@@ -38,6 +38,8 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
           onSearchSubmit(query);
         }
       },
+      
+      
       getSources({ query }) {
         return [
           {
