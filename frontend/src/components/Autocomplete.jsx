@@ -33,12 +33,15 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
       },
       onSubmit({ state }) {
         const query = state.query?.trim();
-        if (query) {
+        if (query !== undefined) {
           recentSearchesPlugin.data.addItem({ label: query });
           onSearchSubmit(query);
         }
       },
-      
+       // ✅ Fires when clicking ❌ (clear)
+  onReset() {
+    onSearchSubmit("");
+  },
       
       getSources({ query }) {
         return [
