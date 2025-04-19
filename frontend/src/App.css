@@ -803,4 +803,90 @@ body {
 }
 }
 
+/* Autocomplete */
 
+/* 🔍 Autocomplete result item layout */
+.autocomplete-box-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.box-thumbnail {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.box-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* 🔥 Widen and center the autocomplete dropdown */
+.aa-Panel {
+  width: 60vw !important;
+  max-width: 900px;
+  min-width: 600px;
+  z-index: 9999;
+  left: 50% !important;
+  transform: translateX(-50%);
+}
+
+
+/* 💡 Use flexbox to lay out the panel sources */
+/* Two-column layout */
+.aa-PanelSections {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+
+
+/* Custom two-column layout */
+.two-column-panel > .aa-PanelLayout {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+/* LEFT column = Recent + Query Suggestions */
+.two-column-panel .aa-Source[data-autocomplete-source-id="recentSearches"],
+.two-column-panel .aa-Source[data-autocomplete-source-id="querySuggestions"] {
+  order: 1;
+  flex: 1;
+}
+
+/* RIGHT column = Boxes */
+.two-column-panel .aa-Source[data-autocomplete-source-id="boxes"] {
+  order: 2;
+  flex: 2;
+}
+
+
+/* LEFT COLUMN */
+.two-column-panel .aa-Section--left {
+  order: 1;
+  flex: 1;
+}
+
+/* RIGHT COLUMN */
+.two-column-panel .aa-Section--right {
+  order: 2;
+  flex: 2;
+}
+
+.aa-Section--left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1rem;
+}
+
+
+.aa-Section--right {
+  flex: 2;
+}
