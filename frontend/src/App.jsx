@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { algoliasearch } from "algoliasearch";
 import {
   InstantSearch,
@@ -28,6 +28,8 @@ const searchClient = algoliasearch(
 
 const indexName = import.meta.env.VITE_ALGOLIA_INDEX_NAME;
 
+const recommendClient = searchClient.initRecommend();
+
 function CustomHits() {
   const { hits } = useHits();
   const [selectedBox, setSelectedBox] = useState(null);
@@ -40,15 +42,14 @@ function CustomHits() {
 
   return (
     <>
-    <div className="hits-container">
-      {hits.map((hit) => (
-        <Hit key={hit.objectID} hit={hit} onBoxClick={handleBoxClick} />
-      ))}
-    </div>
-    
-    <BoxModal box={selectedBox} onClose={closeModal} />
-    </>
+      <div className="hits-container">
+        {hits.map((hit) => (
+          <Hit key={hit.objectID} hit={hit} onBoxClick={handleBoxClick} />
+        ))}
+      </div>
 
+      <BoxModal box={selectedBox} onClose={closeModal} />
+    </>
   );
 }
 
@@ -65,6 +66,7 @@ export default function App() {
     "Wellness Seeker": "Stay Wellness",
     Stay: "Stay",
   };
+
   return (
     <div className="app-container">
       <InstantSearch
@@ -123,6 +125,7 @@ export default function App() {
             </div>
             <div className="pagination-container">
               <Pagination />
+             
             </div>
           </div>
         </main>
