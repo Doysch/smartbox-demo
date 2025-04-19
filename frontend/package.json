@@ -11,6 +11,10 @@
   },
   "dependencies": {
     "@algolia/autocomplete-js": "^1.18.1",
+    "@algolia/autocomplete-plugin-query-suggestions": "^1.18.1",
+    "@algolia/autocomplete-plugin-recent-searches": "^1.18.1",
+    "@algolia/autocomplete-preset-algolia": "^1.18.1",
+    "@algolia/autocomplete-theme-classic": "^1.18.1",
     "algoliasearch": "^5.23.4",
     "lodash.camelcase": "^4.3.0",
     "react": "^19.0.0",
