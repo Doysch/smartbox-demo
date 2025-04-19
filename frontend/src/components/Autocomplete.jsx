@@ -16,7 +16,7 @@ const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
   limit: 3,
 });
 
-export default function Autocomplete({ onSearchSubmit }) {
+export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ export default function Autocomplete({ onSearchSubmit }) {
       plugins: [],
       placeholder: "Recherchez une expérience...",
       openOnFocus: true,
+      initialState: { query: initialQuery }, 
       classNames: {
         panel: "aa-Panel two-column-panel",
       },
@@ -140,7 +141,7 @@ export default function Autocomplete({ onSearchSubmit }) {
     });
 
     return () => instance.destroy();
-  }, [onSearchSubmit]);
+  }, [onSearchSubmit, initialQuery]);
 
   return (
     <div
