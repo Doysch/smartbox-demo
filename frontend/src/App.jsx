@@ -22,6 +22,8 @@ import DestinationsDropdown from "./components/DestinationsDropdown";
 import CategoryDropdown from "./components/CategoryDropdown";
 import PersonaDropdown from "./components/PersonaDropdown";
 import PlatformDropdown from "./components/PlatformDropdown";
+import  Autocomplete  from './components/Autocomplete';
+
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -103,15 +105,7 @@ export default function App() {
           </Link>
 
           <div className="search-wrapper">
-            <SearchBox
-              placeholder="2 nuits, Parachute, Insolite ..."
-              classNames={{
-                root: "searchbox-root",
-                input: "searchbox-input",
-                submit: "searchbox-submit",
-                reset: "searchbox-reset",
-              }}
-            />
+          <Autocomplete onSearchSubmit={(query) => console.log('Submitted query:', query)} />
           </div>
 
           <PersonaDropdown onChange={handlePersonaChange} />
