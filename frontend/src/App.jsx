@@ -86,32 +86,30 @@ export default function App() {
         routing={{ router: history(), stateMapping: singleIndex(indexName) }}
       >
         <header className="search-header">
-        <Link to="/" className="logo" onClick={handleLogoClick}>
-  <img src={smartboxLogo} alt="Smartbox Logo" />
-</Link>
-          <SearchWrapper
-            onLogoClick={(cb) => (logoClickHandlerRef.current = cb)}
-          />
-          <PersonaDropdown onChange={setPersona} />
-          <div className="nav-icons">
-            <div className="nav-item">
-              <span className="icon">👤</span>
-              <span>Me connecter</span>
-            </div>
-            <div className="nav-item">
-              <span className="icon">🛒</span>
-              <span>Panier</span>
-            </div>
-          </div>
-          <PlatformDropdown onChange={setPlatform} />
-        </header>
+  <Link to="/" className="logo" onClick={handleLogoClick}>
+    <img src={smartboxLogo} alt="Smartbox Logo" />
+  </Link>
 
-        <div className="dropdowns-row">
-          <CategoryDropdown />
-          <ExperienceDropdown />
-          <OccasionsDropdown />
-          <DestinationsDropdown />
-        </div>
+  <div className="search-wrapper">
+    <SearchWrapper onLogoClick={(cb) => (logoClickHandlerRef.current = cb)} />
+  </div>
+
+  <div className="nav-icons">
+    <div className="nav-item">
+      <span className="icon">👤</span>
+      <span>Me connecter</span>
+    </div>
+    <div className="nav-item">
+      <span className="icon">🛒</span>
+      <span>Panier</span>
+    </div>
+    <div className="persona-wrapper">
+      <PersonaDropdown onChange={setPersona} />
+    </div>
+  </div>
+
+  <PlatformDropdown onChange={setPlatform} />
+</header>
 
         <main className="main-content">
           {isMobile ? (
