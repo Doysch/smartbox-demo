@@ -96,18 +96,19 @@ export default function RefinementPanel() {
             showMore
             searchable
             searchablePlaceholder="Rechercher..."
-            translation
-            
-            s={showMoreTranslations}
+            translations={showMoreTranslations}
           />
         </Panel>
         <Panel header="Dégustations">
-  <RefinementList attribute="filters.degustations" />
-</Panel>
+          <RefinementList attribute="filters.degustations" />
+        </Panel>
 
-<Panel header="Cantons suisses">
-  <RefinementList attribute="filters.cantonsSuisses" />
-</Panel>
+        <Panel header="Cantons suisses">
+          <RefinementList attribute="filters.cantonsSuisses" />
+        </Panel>
+        <Panel header="category">
+          <RefinementList attribute="categoryPageId" />
+        </Panel>
       </DynamicWidgets>
     </aside>
   );
