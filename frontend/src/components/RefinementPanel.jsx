@@ -1,6 +1,10 @@
-// src/components/RefinementPanel.jsx
 import React from "react";
-import { RefinementList, CurrentRefinements } from "react-instantsearch";
+import {
+  RefinementList,
+  CurrentRefinements,
+  DynamicWidgets,
+} from "react-instantsearch";
+import Panel from "./Panel";
 
 const showMoreTranslations = {
   showMoreButtonText({ isShowingMore }) {
@@ -38,67 +42,73 @@ export default function RefinementPanel() {
         }
       />
 
-      <div className="refinement-group">
-        <h4>Prix</h4>
-        <RefinementList
-          attribute="price_range"
-          limit={5}
-          
-          transformItems={(items) =>
-            items.map((item) => ({
-              ...item,
-              label: categoryTranslations[item.label] || item.label,
-            }))
-          }
-        />
-      </div>
-      <div className="refinement-group">
-        <h4>Catégories</h4>
-        <RefinementList
-          attribute="categories.lvl0"
-          limit={5}
-          showMore
-          translations={showMoreTranslations}
-          transformItems={(items) =>
-            items.map((item) => ({
-              ...item,
-              label: categoryTranslations[item.label] || item.label,
-            }))
-          }
-        />
-      </div>
+      <DynamicWidgets fallbackComponent={null}>
+        <Panel header="Prix">
+          <RefinementList
+            attribute="price_range"
+            limit={5}
+            transformItems={(items) =>
+              items.map((item) => ({
+                ...item,
+                label: categoryTranslations[item.label] || item.label,
+              }))
+            }
+          />
+        </Panel>
 
-      <div className="refinement-group">
-        <h4>Expériences</h4>
-        <RefinementList
-          attribute="filters.experiences"
-          limit={5}
-          showMore
-          translations={showMoreTranslations}
-        />
-      </div>
+        <Panel header="Catégories">
+          <RefinementList
+            attribute="categories.lvl0"
+            limit={5}
+            showMore
+            translations={showMoreTranslations}
+            transformItems={(items) =>
+              items.map((item) => ({
+                ...item,
+                label: categoryTranslations[item.label] || item.label,
+              }))
+            }
+          />
+        </Panel>
 
-      <div className="refinement-group">
-        <h4>Occasions</h4>
-        <RefinementList
-          attribute="filters.occasions"
-          limit={5}
-          showMore
-          translations={showMoreTranslations}
-        />
-      </div>
+        <Panel header="Expériences">
+          <RefinementList
+            attribute="filters.experiences"
+            limit={5}
+            showMore
+            translations={showMoreTranslations}
+          />
+        </Panel>
 
-      <div className="refinement-group">
-        <h4>Pour qui</h4>
-        <RefinementList
-          attribute="filters.pourQui"
-          limit={5}
-          showMore
-          searchable
-          searchablePlaceholder="Rechercher..."
-          translations={showMoreTranslations}
-        />
-      </div>
+        <Panel header="Occasions">
+          <RefinementList
+            attribute="filters.occasions"
+            limit={5}
+            showMore
+            translations={showMoreTranslations}
+          />
+        </Panel>
+
+        <Panel header="Pour qui">
+          <RefinementList
+            attribute="filters.pourQui"
+            limit={5}
+            showMore
+            searchable
+            searchablePlaceholder="Rechercher..."
+            translation
+            
+            s={showMoreTranslations}
+          />
+        </Panel>
+        <Panel header="Dégustations">
+  <RefinementList attribute="filters.degustations" />
+</Panel>
+
+<Panel header="Cantons suisses">
+  <RefinementList attribute="filters.cantonsSuisses" />
+</Panel>
+      </DynamicWidgets>
     </aside>
   );
 }
