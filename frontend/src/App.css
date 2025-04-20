@@ -15,13 +15,19 @@ body {
 
 /* Header layout: logo, search, nav */
 .search-header {
+  display: grid;
+  grid-template-areas:
+    "logo search nav platform";
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
   padding: 1rem 2rem;
   background-color: #fff;
   border-bottom: 1px solid #eee;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
+}
+
+.logo {
+  grid-area: logo;
 }
 
 .logo img {
@@ -30,40 +36,48 @@ body {
 
 /* Centered search */
 .search-wrapper {
-  flex: 1;
-  display: flex;
-  justify-content: center;
+  grid-area: search;
+  justify-self: center; /* ✅ Forces it to be visually centered */
+  width: 100%;
+  max-width: 700px;
 }
 
+
 .searchbox-root {
-  width: 100%;
-  max-width: 600px;
-  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 40px;
+  padding: 0.5rem 1rem;
+}
+
+.searchbox-root:focus-within {
+  border-color: limegreen;
+  box-shadow: 0 0 0 4px orange;
 }
 
 .searchbox-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
+  flex: 1;
+  border: none;
+  outline: none;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 30px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  padding: 0.75rem 1rem;
+  background-color: #fff;
+  color: #333;
+}
+
+.searchbox-input::placeholder {
+  color: black;
 }
 
 .searchbox-submit {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
+  background: #f0543c;
   border: none;
-  font-size: 1.2rem;
-  color: #f0543c;
-  cursor: pointer;
+  color: white;
 }
 
 .searchbox-reset {
-  display: none;
+  background-color: #ddd;
+  color: #333;
 }
 
 /* Nav icons */
@@ -493,6 +507,10 @@ body {
   margin-left: 2rem;
 }
 
+.persona-wrapper {
+  margin-left: 2rem;
+}
+
 #persona-select {
   padding: 0.5rem 0.75rem;
   border: 1px solid #ccc;
@@ -514,13 +532,11 @@ body {
 
 /* Platform dropdown (styled like Persona) */
 .platform-dropdown-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 0.9rem;
-  gap: 0.25rem;
-  margin-left: 2rem;
+  grid-area: platform;
+  display: none;
+
 }
+
 
 
 
@@ -539,6 +555,13 @@ body {
 .platform-select:focus {
   border-color: #f0543c;
   outline: none;
+}
+
+.nav-group {
+  grid-area: nav;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 /* Modal */
@@ -725,7 +748,11 @@ body {
     display: block;
   }
 
-
+  .refinement-toggle-wrapper {
+    display: block;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
 
   .hits-container {
     grid-template-columns: 1fr; /* 1 column for list view */
@@ -763,11 +790,7 @@ body {
     width: 100%;
   }
 
-  .refinement-toggle-wrapper {
-    display: block;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-  }
+  
 
   .refinement-panel {
     display: none;
@@ -801,11 +824,114 @@ body {
 .persona-dropdown-wrapper {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .platform-dropdown-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 }
 
 /* Autocomplete */
 
 /* 🔍 Autocomplete result item layout */
+
+/* Style the autocomplete container */
+.autocomplete-wrapper {
+  width: 100%;
+  max-width: 700px;
+}
+
+/* 👀 MAIN AUTOCOMPLETE CONTAINER */
+.aa-Autocomplete {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+/* 🎯 ONLY STYLE FORM (the actual box) */
+.aa-Form {
+  border: 1px solid #ccc; /* light grey */
+  border-radius: 999px;   /* max pill shape */
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aa-Form:focus-within {
+  border-color: #bbb;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 🧼 Reset inner wrappers */
+.aa-InputWrapper,
+.aa-InputWrapperPrefix,
+.aa-InputWrapperSuffix {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+
+
+/* 🧠 INPUT ITSELF */
+.aa-Input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  background-color: transparent;
+  color: #333;
+}
+
+.aa-Input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.aa-Input::placeholder {
+  color: #999;
+}
+
+/* 🔍 Search icon */
+.aa-SubmitButton {
+  background: none;
+  border: none;
+  color: #f0543c;  /* Smartbox red */
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+/* ❌ Clear button */
+.aa-ClearButton {
+  background: none;
+  border: none;
+  color: #888;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+.aa-ClearButton:hover {
+  color: #f0543c;
+}
+
+/* ⏳ Loading spinner */
+.aa-LoadingIndicator {
+  padding: 0 0.5rem;
+  color: #f0543c;
+}
+
+/* 🔽 Dropdown layout and result items */
 .autocomplete-box-item {
   display: flex;
   align-items: center;
@@ -825,7 +951,7 @@ body {
   font-weight: 500;
 }
 
-/* 🔥 Widen and center the autocomplete dropdown */
+/* 🔥 Dropdown panel styling */
 .aa-Panel {
   width: 60vw !important;
   max-width: 900px;
@@ -835,46 +961,22 @@ body {
   transform: translateX(-50%);
 }
 
-
-/* 💡 Use flexbox to lay out the panel sources */
-/* Two-column layout */
-.aa-PanelSections {
-  display: flex;
-  gap: 2rem;
-  padding: 1rem;
-}
-
-
-
-/* Custom two-column layout */
+/* Panel layout */
+.aa-PanelSections,
 .two-column-panel > .aa-PanelLayout {
   display: flex;
   gap: 2rem;
   padding: 1rem;
 }
 
-/* LEFT column = Recent + Query Suggestions */
+/* Columns inside panel */
 .two-column-panel .aa-Source[data-autocomplete-source-id="recentSearches"],
 .two-column-panel .aa-Source[data-autocomplete-source-id="querySuggestions"] {
   order: 1;
   flex: 1;
 }
 
-/* RIGHT column = Boxes */
 .two-column-panel .aa-Source[data-autocomplete-source-id="boxes"] {
-  order: 2;
-  flex: 2;
-}
-
-
-/* LEFT COLUMN */
-.two-column-panel .aa-Section--left {
-  order: 1;
-  flex: 1;
-}
-
-/* RIGHT COLUMN */
-.two-column-panel .aa-Section--right {
   order: 2;
   flex: 2;
 }
@@ -886,7 +988,57 @@ body {
   gap: 1rem;
 }
 
-
 .aa-Section--right {
   flex: 2;
+}
+
+.aa-Autocomplete .aa-Form {
+  border-radius: 12px !important;
+  border: 1px solid #ccc !important;
+  background-color: #fff !important;
+  overflow: hidden;
+}
+
+/* 🔁 Strong override for autocomplete styles */
+
+.aa-Autocomplete .aa-Form {
+  border: 1px solid #ddd !important;               /* Lighter grey */
+  border-radius: 999px !important;                 /* Full pill */
+  background: #fff !important;
+  padding: 0.5rem 1rem !important;
+  box-shadow: none !important;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aa-Autocomplete .aa-Form:hover {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+
+.aa-Autocomplete .aa-Form:focus-within {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.aa-Autocomplete .aa-Input {
+  padding: 0.75rem 1.25rem !important;
+  font-size: 1rem !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  color: #333 !important;
+}
+
+.aa-Autocomplete .aa-SubmitButton {
+  color: #f0543c !important; /* Smartbox red */
+}
+
+.aa-Autocomplete .aa-SubmitButton .aa-SubmitIcon {
+  color: #f0543c !important;
+  fill: #f0543c !important; /* just to be safe for inline SVG */
+}
+
+.aa-Autocomplete .aa-ClearButton:hover {
+  color: #f0543c !important;
 }

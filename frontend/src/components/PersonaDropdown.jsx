@@ -15,7 +15,7 @@ export default function PersonaDropdown({ onChange }) {
     <div className="persona-dropdown-wrapper">
       <label htmlFor="persona-select">Personas:&nbsp;</label>
       <select id="persona-select" value={selected} onChange={handleChange}>
-        <option value="">-- Choisir un persona --</option>
+        <option value="">Choisir un persona</option>
         <option value="Thrill Seeker">Aventurier</option>
         <option value="Foodie">Gourmand</option>
         <option value="Wellness Seeker">Bien-être</option>
