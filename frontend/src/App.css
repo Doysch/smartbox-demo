@@ -33,6 +33,7 @@ body {
   flex: 1;
   display: flex;
   justify-content: center;
+  max-width: 800px;
 }
 
 .searchbox-root {
@@ -42,13 +43,14 @@ body {
 }
 
 .searchbox-input {
-  width: 100%;
+  border-radius: 30px;
   padding: 0.75rem 1rem;
   font-size: 1rem;
+  width: 100%;
   border: 1px solid #ccc;
-  border-radius: 30px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
 
 .searchbox-submit {
   position: absolute;
@@ -493,6 +495,10 @@ body {
   margin-left: 2rem;
 }
 
+.persona-wrapper {
+  margin-left: 2rem;
+}
+
 #persona-select {
   padding: 0.5rem 0.75rem;
   border: 1px solid #ccc;
@@ -806,6 +812,100 @@ body {
 /* Autocomplete */
 
 /* 🔍 Autocomplete result item layout */
+
+/* Style the autocomplete container */
+.autocomplete-wrapper {
+  width: 100%;
+  max-width: 700px;
+}
+
+/* 👀 MAIN AUTOCOMPLETE CONTAINER */
+.aa-Autocomplete {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+
+/* 🎯 ONLY STYLE FORM (the actual box) */
+.aa-Form {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ✨ FOCUS EFFECT */
+.aa-Form:focus-within {
+  border-color: #888;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+/* 🧼 Reset inner wrappers */
+.aa-InputWrapper,
+.aa-InputWrapperPrefix,
+.aa-InputWrapperSuffix {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+/* 🧠 INPUT ITSELF */
+.aa-Input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  background-color: transparent;
+  color: #333;
+}
+
+.aa-Input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.aa-Input::placeholder {
+  color: #999;
+}
+
+/* 🔍 Search icon */
+.aa-SubmitButton {
+  background: none;
+  border: none;
+  color: #f0543c;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+/* ❌ Clear button */
+.aa-ClearButton {
+  background: none;
+  border: none;
+  color: #888;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+.aa-ClearButton:hover {
+  color: #f0543c;
+}
+
+/* ⏳ Loading spinner */
+.aa-LoadingIndicator {
+  padding: 0 0.5rem;
+  color: #f0543c;
+}
+
+/* 🔽 Dropdown layout and result items */
 .autocomplete-box-item {
   display: flex;
   align-items: center;
@@ -825,7 +925,7 @@ body {
   font-weight: 500;
 }
 
-/* 🔥 Widen and center the autocomplete dropdown */
+/* 🔥 Dropdown panel styling */
 .aa-Panel {
   width: 60vw !important;
   max-width: 900px;
@@ -835,46 +935,22 @@ body {
   transform: translateX(-50%);
 }
 
-
-/* 💡 Use flexbox to lay out the panel sources */
-/* Two-column layout */
-.aa-PanelSections {
-  display: flex;
-  gap: 2rem;
-  padding: 1rem;
-}
-
-
-
-/* Custom two-column layout */
+/* Panel layout */
+.aa-PanelSections,
 .two-column-panel > .aa-PanelLayout {
   display: flex;
   gap: 2rem;
   padding: 1rem;
 }
 
-/* LEFT column = Recent + Query Suggestions */
+/* Columns inside panel */
 .two-column-panel .aa-Source[data-autocomplete-source-id="recentSearches"],
 .two-column-panel .aa-Source[data-autocomplete-source-id="querySuggestions"] {
   order: 1;
   flex: 1;
 }
 
-/* RIGHT column = Boxes */
 .two-column-panel .aa-Source[data-autocomplete-source-id="boxes"] {
-  order: 2;
-  flex: 2;
-}
-
-
-/* LEFT COLUMN */
-.two-column-panel .aa-Section--left {
-  order: 1;
-  flex: 1;
-}
-
-/* RIGHT COLUMN */
-.two-column-panel .aa-Section--right {
   order: 2;
   flex: 2;
 }
@@ -886,7 +962,13 @@ body {
   gap: 1rem;
 }
 
-
 .aa-Section--right {
   flex: 2;
+}
+
+.aa-Autocomplete .aa-Form {
+  border-radius: 12px !important;
+  border: 1px solid #ccc !important;
+  background-color: #fff !important;
+  overflow: hidden;
 }
