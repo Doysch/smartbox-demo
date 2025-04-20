@@ -86,30 +86,38 @@ export default function App() {
         routing={{ router: history(), stateMapping: singleIndex(indexName) }}
       >
         <header className="search-header">
-  <Link to="/" className="logo" onClick={handleLogoClick}>
-    <img src={smartboxLogo} alt="Smartbox Logo" />
-  </Link>
+          <Link to="/" className="logo" onClick={handleLogoClick}>
+            <img src={smartboxLogo} alt="Smartbox Logo" />
+          </Link>
 
-  <div className="search-wrapper">
-    <SearchWrapper onLogoClick={(cb) => (logoClickHandlerRef.current = cb)} />
-  </div>
+          <div className="search-wrapper">
+            <SearchWrapper
+              onLogoClick={(cb) => (logoClickHandlerRef.current = cb)}
+            />
+          </div>
 
-  <div className="nav-group">
-    <div className="nav-icons">
-      <div className="nav-item">
-        <span className="icon">👤</span>
-        <span>Me connecter</span>
-      </div>
-      <div className="nav-item">
-        <span className="icon">🛒</span>
-        <span>Panier</span>
-      </div>
-    </div>
-    <PersonaDropdown onChange={setPersona} />
-  </div>
+          <div className="nav-group">
+            <div className="nav-icons">
+              <div className="nav-item">
+                <span className="icon">👤</span>
+                <span>Me connecter</span>
+              </div>
+              <div className="nav-item">
+                <span className="icon">🛒</span>
+                <span>Panier</span>
+              </div>
+            </div>
+            <PersonaDropdown onChange={setPersona} />
+          </div>
 
-  <PlatformDropdown onChange={setPlatform} />
-</header>
+          <PlatformDropdown onChange={setPlatform} />
+        </header>
+        <div className="dropdowns-row">
+                  <CategoryDropdown />
+                  <ExperienceDropdown />
+                  <OccasionsDropdown />
+                  <DestinationsDropdown />
+                </div>
 
         <main className="main-content">
           {isMobile ? (
