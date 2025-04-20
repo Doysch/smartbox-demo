@@ -46,11 +46,8 @@ body {
 .searchbox-root {
   display: flex;
   align-items: center;
-  background-color: yellow;
-  border: 3px dashed red;
   border-radius: 40px;
   padding: 0.5rem 1rem;
-  box-shadow: 0 0 0 4px magenta;
 }
 
 .searchbox-root:focus-within {
@@ -64,8 +61,8 @@ body {
   outline: none;
   font-size: 1rem;
   padding: 0.75rem 1rem;
-  background-color: cyan;
-  color: purple;
+  background-color: #fff;
+  color: #333;
 }
 
 .searchbox-input::placeholder {
@@ -73,21 +70,14 @@ body {
 }
 
 .searchbox-submit {
-  background: black;
-  border: 2px solid red;
+  background: #f0543c;
+  border: none;
   color: white;
-  padding: 0.25rem 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .searchbox-reset {
-  display: block !important;
-  background-color: red;
-  color: white;
+  background-color: #ddd;
+  color: #333;
 }
 
 /* Nav icons */
@@ -758,7 +748,11 @@ body {
     display: block;
   }
 
-
+  .refinement-toggle-wrapper {
+    display: block;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+  }
 
   .hits-container {
     grid-template-columns: 1fr; /* 1 column for list view */
@@ -796,11 +790,7 @@ body {
     width: 100%;
   }
 
-  .refinement-toggle-wrapper {
-    display: block;
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-  }
+  
 
   .refinement-panel {
     display: none;
@@ -890,6 +880,8 @@ body {
   display: flex;
   align-items: center;
 }
+
+
 
 /* 🧠 INPUT ITSELF */
 .aa-Input {
