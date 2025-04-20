@@ -1,33 +1,30 @@
 // src/components/RefinementPanel.jsx
-import React from 'react';
-import {
-  RefinementList,
-  CurrentRefinements,
-} from 'react-instantsearch';
+import React from "react";
+import { RefinementList, CurrentRefinements } from "react-instantsearch";
 
 const showMoreTranslations = {
   showMoreButtonText({ isShowingMore }) {
-    return isShowingMore ? 'Voir moins' : 'Découvrir plus';
+    return isShowingMore ? "Voir moins" : "Découvrir plus";
   },
 };
 
 const refinementLabelMap = {
-  'categories.lvl0': 'Catégories',
-  'filters.experiences': 'Expériences',
-  'filters.occasions': 'Occasions',
-  'filters.pourQui': 'Pour qui',
+  "categories.lvl0": "Catégories",
+  "filters.experiences": "Expériences",
+  "filters.occasions": "Occasions",
+  "filters.pourQui": "Pour qui",
 };
 
 const categoryTranslations = {
-    "Adventure": "Aventure",
-    "Stay": "Séjour",
-    "Multi-thematic": "Multi-thématique",
-    "Gastronomy": "Gastronomie",
-    "Stay Wellness": "Séjour Bien-être",
-    "OVP": "Offres variées",
-    "Stay Gastronomy": "Séjour Gastronomique",
-    "Wellness": "Bien-être",
-  };
+  Adventure: "Aventure",
+  Stay: "Séjour",
+  "Multi-thematic": "Multi-thématique",
+  Gastronomy: "Gastronomie",
+  "Stay Wellness": "Séjour Bien-être",
+  OVP: "Offres variées",
+  "Stay Gastronomy": "Séjour Gastronomique",
+  Wellness: "Bien-être",
+};
 
 export default function RefinementPanel() {
   return (
@@ -41,6 +38,20 @@ export default function RefinementPanel() {
         }
       />
 
+      <div className="refinement-group">
+        <h4>Prix</h4>
+        <RefinementList
+          attribute="price_range"
+          limit={5}
+          
+          transformItems={(items) =>
+            items.map((item) => ({
+              ...item,
+              label: categoryTranslations[item.label] || item.label,
+            }))
+          }
+        />
+      </div>
       <div className="refinement-group">
         <h4>Catégories</h4>
         <RefinementList
