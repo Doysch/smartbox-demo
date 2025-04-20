@@ -2,7 +2,6 @@
 
 import {
   InstantSearch,
-  SearchBox,
   Configure,
   Pagination,
   Stats,
@@ -106,7 +105,7 @@ export default function CategoryPage() {
 
         <Configure
           hitsPerPage={12}
-          filters={`categories.lvl0:"${decodedCategory}"`}
+          filters={`categoryPageId:"${decodedCategory}"`}
         />
       </InstantSearch>
     </div>
