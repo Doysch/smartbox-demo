@@ -44,35 +44,50 @@ body {
 
 
 .searchbox-root {
-  width: 100%;
-  max-width: 600px;
-  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: yellow;
+  border: 3px dashed red;
+  border-radius: 40px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 0 0 4px magenta;
+}
+
+.searchbox-root:focus-within {
+  border-color: limegreen;
+  box-shadow: 0 0 0 4px orange;
 }
 
 .searchbox-input {
-  border-radius: 30px;
-  padding: 0.75rem 1rem;
+  flex: 1;
+  border: none;
+  outline: none;
   font-size: 1rem;
-  width: 100%;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  padding: 0.75rem 1rem;
+  background-color: cyan;
+  color: purple;
 }
 
+.searchbox-input::placeholder {
+  color: black;
+}
 
 .searchbox-submit {
-  position: absolute;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  color: #f0543c;
+  background: black;
+  border: 2px solid red;
+  color: white;
+  padding: 0.25rem 1rem;
+  font-weight: bold;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .searchbox-reset {
-  display: none;
+  display: block !important;
+  background-color: red;
+  color: white;
 }
 
 /* Nav icons */
@@ -900,7 +915,7 @@ body {
 .aa-SubmitButton {
   background: none;
   border: none;
-  color: #f0543c;
+  color: #f0543c;  /* Smartbox red */
   padding: 0 0.5rem;
   cursor: pointer;
 }
@@ -990,4 +1005,48 @@ body {
   border: 1px solid #ccc !important;
   background-color: #fff !important;
   overflow: hidden;
+}
+
+/* 🔁 Strong override for autocomplete styles */
+
+.aa-Autocomplete .aa-Form {
+  border: 1px solid #ddd !important;               /* Lighter grey */
+  border-radius: 999px !important;                 /* Full pill */
+  background: #fff !important;
+  padding: 0.5rem 1rem !important;
+  box-shadow: none !important;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.aa-Autocomplete .aa-Form:hover {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+
+.aa-Autocomplete .aa-Form:focus-within {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.aa-Autocomplete .aa-Input {
+  padding: 0.75rem 1.25rem !important;
+  font-size: 1rem !important;
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  color: #333 !important;
+}
+
+.aa-Autocomplete .aa-SubmitButton {
+  color: #f0543c !important; /* Smartbox red */
+}
+
+.aa-Autocomplete .aa-SubmitButton .aa-SubmitIcon {
+  color: #f0543c !important;
+  fill: #f0543c !important; /* just to be safe for inline SVG */
+}
+
+.aa-Autocomplete .aa-ClearButton:hover {
+  color: #f0543c !important;
 }
