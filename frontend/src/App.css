@@ -43,42 +43,6 @@ body {
 }
 
 
-.searchbox-root {
-  display: flex;
-  align-items: center;
-  border-radius: 40px;
-  padding: 0.5rem 1rem;
-}
-
-.searchbox-root:focus-within {
-  border-color: limegreen;
-  box-shadow: 0 0 0 4px orange;
-}
-
-.searchbox-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
-  background-color: #fff;
-  color: #333;
-}
-
-.searchbox-input::placeholder {
-  color: black;
-}
-
-.searchbox-submit {
-  background: #f0543c;
-  border: none;
-  color: white;
-}
-
-.searchbox-reset {
-  background-color: #ddd;
-  color: #333;
-}
 
 /* Nav icons */
 .nav-icons {

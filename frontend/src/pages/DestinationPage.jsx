@@ -1,6 +1,5 @@
 import {
   InstantSearch,
-  SearchBox,
   Configure,
   Pagination,
   Stats,
@@ -15,6 +14,7 @@ import ExperienceDropdown from "../components/ExperienceDropdown";
 import OccasionsDropdown from "../components/OccasionsDropdown";
 import DestinationsDropdown from "../components/DestinationsDropdown";
 import CategoryDropdown from "../components/CategoryDropdown";
+import SearchWrapper from "../components/SearchWrapper";
 import "../App.css";
 
 const searchClient = algoliasearch(
@@ -55,16 +55,8 @@ export default function DestinationPage() {
           </div>
 
           <div className="search-wrapper">
-            <SearchBox
-              placeholder="2 nuits, Parachute, Insolite ..."
-              classNames={{
-                root: "searchbox-root",
-                input: "searchbox-input",
-                submit: "searchbox-submit",
-                reset: "searchbox-reset",
-              }}
-            />
-          </div>
+  <SearchWrapper />
+</div>
 
           <div className="nav-icons">
             <div className="nav-item">

@@ -17,6 +17,7 @@ import CategoryDropdown from "../components/CategoryDropdown";
 import OccasionsDropdown from "../components/OccasionsDropdown";
 import DestinationsDropdown from "../components/DestinationsDropdown";
 import ExperienceDropdown from "../components/ExperienceDropdown";
+import SearchWrapper from "../components/SearchWrapper";
 
 import "../App.css";
 
@@ -54,16 +55,8 @@ export default function CategoryPage() {
           </Link>
 
           <div className="search-wrapper">
-            <SearchBox
-              placeholder="2 nuits, Parachute, Insolite ..."
-              classNames={{
-                root: "searchbox-root",
-                input: "searchbox-input",
-                submit: "searchbox-submit",
-                reset: "searchbox-reset",
-              }}
-            />
-          </div>
+  <SearchWrapper />
+</div>
 
           <div className="nav-icons">
             <div className="nav-item">
