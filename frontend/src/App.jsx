@@ -94,18 +94,18 @@ export default function App() {
     <SearchWrapper onLogoClick={(cb) => (logoClickHandlerRef.current = cb)} />
   </div>
 
-  <div className="nav-icons">
-    <div className="nav-item">
-      <span className="icon">👤</span>
-      <span>Me connecter</span>
+  <div className="nav-group">
+    <div className="nav-icons">
+      <div className="nav-item">
+        <span className="icon">👤</span>
+        <span>Me connecter</span>
+      </div>
+      <div className="nav-item">
+        <span className="icon">🛒</span>
+        <span>Panier</span>
+      </div>
     </div>
-    <div className="nav-item">
-      <span className="icon">🛒</span>
-      <span>Panier</span>
-    </div>
-    <div className="persona-wrapper">
-      <PersonaDropdown onChange={setPersona} />
-    </div>
+    <PersonaDropdown onChange={setPersona} />
   </div>
 
   <PlatformDropdown onChange={setPlatform} />
