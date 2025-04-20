@@ -851,8 +851,8 @@ body {
 
 /* 🎯 ONLY STYLE FORM (the actual box) */
 .aa-Form {
-  border: 1px solid #ccc;
-  border-radius: 12px;
+  border: 1px solid #ccc; /* light grey */
+  border-radius: 999px;   /* max pill shape */
   background-color: #fff;
   padding: 0.5rem 1rem;
   display: flex;
@@ -860,10 +860,9 @@ body {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ✨ FOCUS EFFECT */
 .aa-Form:focus-within {
-  border-color: #888;
-  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+  border-color: #bbb;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
 }
 
 /* 🧼 Reset inner wrappers */
