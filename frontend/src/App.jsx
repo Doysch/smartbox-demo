@@ -6,6 +6,7 @@ import {
   Configure,
   Pagination,
   Stats,
+  SortBy
 } from "react-instantsearch";
 import "./App.css";
 import smartboxLogo from "./images/smartbox-logo.png";
@@ -72,6 +73,13 @@ export default function App() {
     Stay: "Stay",
   };
 
+  const personaToContextMap = {
+"Thrill Seeker": "thrill-seeker",
+  Foodie: "foodie",
+  "Wellness Seeker": "wellness-seeker",
+  Stay: "stay",
+};
+
   const handleLogoClick = () => {
     if (logoClickHandlerRef.current) {
       logoClickHandlerRef.current(); // Reset the query
@@ -113,11 +121,11 @@ export default function App() {
           <PlatformDropdown onChange={setPlatform} />
         </header>
         <div className="dropdowns-row">
-                  <CategoryDropdown />
-                  <ExperienceDropdown />
-                  <OccasionsDropdown />
-                  <DestinationsDropdown />
-                </div>
+          <CategoryDropdown />
+          <ExperienceDropdown />
+          <OccasionsDropdown />
+          <DestinationsDropdown />
+        </div>
 
         <main className="main-content">
           {isMobile ? (
@@ -132,6 +140,7 @@ export default function App() {
           )}
 
           <div className="content-area">
+            <div className="results-header">
             <Stats
               translations={{
                 rootElementText({ nbHits, processingTimeMS }) {
@@ -141,6 +150,25 @@ export default function App() {
                 },
               }}
             />
+             <SortBy
+      items={[
+        { label: "Pertinence", value: indexName },
+        {
+          label: "Prix croissant",
+          value: `${indexName}_price_asc`,
+        },
+        {
+          label: "Prix décroissant",
+          value: `${indexName}_price_desc`,
+        },
+        {
+          label: "Meilleures notes",
+          value: `${indexName}_rating_desc`,
+        },
+      ]}
+      defaultRefinement={indexName}
+    />
+            </div>
             <CustomHits />
             <Pagination />
           </div>
@@ -148,6 +176,7 @@ export default function App() {
 
         <Configure
           hitsPerPage={12}
+          getRankingInfo={true}
           enablePersonalization
           personalizationImpact={95}
           personalizationFilters={
@@ -155,7 +184,10 @@ export default function App() {
               ? [`categories.lvl0:${personaToFilterMap[persona]}`]
               : undefined
           }
-          ruleContexts={platform ? [`platform-${platform}`] : []}
+          ruleContexts={[
+            platform ? `platform-${platform}` : null,
+            persona ? `persona-${personaToContextMap[persona]}` : null,
+          ].filter(Boolean)}
         />
       </InstantSearch>
     </div>
