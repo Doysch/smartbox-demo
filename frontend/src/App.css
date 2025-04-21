@@ -726,29 +726,83 @@ body {
 
 @media (max-width: 768px) {
   .search-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .searchbox-input {
-    font-size: 1.1rem;
-    padding: 1rem 1.25rem;
-  }
-
-  .searchbox-root {
-    border-width: 2px;
-    border-radius: 999px;
+    display: grid;
+    grid-template-areas:
+      "logo"
+      "search"
+      "platform";
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
     padding: 0.75rem 1rem;
+    align-items: center;
   }
 
   .logo img {
-    height: 32px;
+    height: 28px; /* slightly smaller logo */
+    max-width: 120px;
+  }
+
+  .search-wrapper,
+  .platform-dropdown-wrapper {
+    width: 100%;
+  }
+
+  .platform-dropdown-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+
+  .autocomplete-wrapper {
+    width: 100%;
+    position: relative !important;
+
+  }
+
+  .aa-Autocomplete {
+    width: 100% !important;
+  }
+
+  .aa-Form {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .aa-Input {
+    width: 100% !important;
+    font-size: 1rem !important;
+    padding: 0.75rem 1.25rem !important;
+  }
+
+  .aa-Autocomplete {
+    width: 100% !important;
+  }
+
+  .aa-Form {
+    width: 100% !important;
+  }
+
+  .aa-Autocomplete .aa-Input {
+    font-size: 1rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .platform-dropdown-wrapper select {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem;
   }
 
   .nav-icons {
-    display: none; /* Optional: hide nav items on mobile */
+    display: none;
+  }
+
+  .nav-group,
+  .persona-dropdown-wrapper {
+    display: none;
   }
 
   .dropdowns-row {
@@ -761,12 +815,12 @@ body {
 
   .main-content {
     flex-direction: column;
-    padding: 0 1rem;
-    gap: 1rem;
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
   }
 
   .refinement-panel {
-    display: block;
+    display: none;
   }
 
   .refinement-toggle-wrapper {
@@ -776,8 +830,9 @@ body {
   }
 
   .hits-container {
-    grid-template-columns: 1fr; /* 1 column for list view */
+    grid-template-columns: 1fr;
     padding: 0;
+    margin-top: 0;
   }
 
   .hit-card {
@@ -804,19 +859,8 @@ body {
   }
 
   .category-dropdown-wrapper {
-    margin: 0.25rem 0;    /* 👈 reduce vertical margin around category button */
+    margin: 0.25rem 0;
   }
-
-  .search-wrapper {
-    width: 100%;
-  }
-
-  
-
-  .refinement-panel {
-    display: none;
-  }
-
 
   .toggle-filters-btn {
     padding: 0.5rem 1rem;
@@ -832,28 +876,119 @@ body {
     background-color: #e04332;
   }
 
-  .main-content {
-    flex-direction: column;
-    padding: 0.5rem 1rem;   /* 👈 tighten vertical padding */
-    gap: 0.5rem;            /* 👈 smaller spacing between panels and hits */
-  }
+/* Mobile Autcomplete */
 
-  .hits-container {
-    margin-top: 0;
-}
-
-.persona-dropdown-wrapper {
-  display: none;
+/* 🔧 Mobile-friendly autocomplete layout */
+.aa-PanelLayout {
+  flex-direction: column !important;
+  align-items: stretch;
+  padding: 0.75rem 1rem !important;
+  gap: 1rem;
+  padding: 0.5rem 1rem !important;
+  gap: 0.5rem !important;
 }
 
-@media (max-width: 768px) {
-  .platform-dropdown-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+/* Stack each section (Suggestions, Smartbox, etc.) */
+.aa-Source {
+  width: 100% !important;
 }
+
+/* Headings like "Suggestions" and "Coffrets Smartbox" */
+.aa-SourceHeader {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
 }
+
+/* Make lists and items easier to tap */
+.aa-List {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.aa-Item {
+  padding: 0.5rem .75rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+/* Smartbox items */
+.autocomplete-box-item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.autocomplete-box-item img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.autocomplete-box-item .box-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.2;
+}
+
+.aa-Panel {
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 95% !important;
+  max-width: 95% !important;
+  right: auto !important; /* override inline style */
+  min-width: 0 !important;
+
+}
+
+.aa-Panel.aa-Panel.two-column-panel {
+  position: fixed !important;
+  top: 115px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 95% !important;
+  max-width: 95% !important;
+  right: auto !important;
+  z-index: 9999 !important;
+  border-radius: 12px !important;
+  background: white !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+}
+
+
+.refinement-toggle-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Subtle, left-aligned button style */
+.toggle-filters-btn.secondary-toggle {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: #333;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-weight: 500;
+  box-shadow: none;
+  text-align: left;
+  margin-left: 0; /* ensure no auto margins */
+}
+.toggle-filters-btn.secondary-toggle:hover {
+  background-color: #f7f7f7;
+}
+
+}
+
+/* END OF MEDIANQUERY */
 
 /* Autocomplete */
 
@@ -863,6 +998,8 @@ body {
 .autocomplete-wrapper {
   width: 100%;
   max-width: 700px;
+  position: relative; /* ✨ make this always the context */
+
 }
 
 /* 👀 MAIN AUTOCOMPLETE CONTAINER */
