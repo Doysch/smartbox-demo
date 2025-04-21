@@ -31,7 +31,7 @@ export default function SearchWrapper({ onLogoClick }) {
     }));
   };
 
-  // Notify parent when logo is clicked
+
   React.useEffect(() => {
     if (onLogoClick) {
       onLogoClick(() => handleResetQuery());
