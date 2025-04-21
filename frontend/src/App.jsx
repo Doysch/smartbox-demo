@@ -25,6 +25,7 @@ import { singleIndex } from "instantsearch.js/es/lib/stateMappings";
 import SearchWrapper from "./components/SearchWrapper";
 import TrendingItems from "./components/TrendingItems";
 import { useIsMobile } from "./hooks/useIsMobile";
+import NoResultsFallback from "./components/NoResultsFallback";
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -166,6 +167,7 @@ export default function App() {
               />
             </div>
             <CustomHits />
+            <NoResultsFallback />
             <Pagination />
           </div>
         </main>
