@@ -27,6 +27,7 @@ import SearchWrapper from "./components/SearchWrapper";
 import { connectSearchBox } from "instantsearch.js/es/connectors";
 import TrendingItems from "./components/TrendingItems";
 import { useInstantSearch } from "react-instantsearch";
+import { useIsMobile } from "./hooks/useIsMobile"; // adjust path if needed
 
 
 const VirtualSearchBoxWidget = connectSearchBox(() => null);
@@ -38,15 +39,7 @@ const searchClient = algoliasearch(
 
 const indexName = import.meta.env.VITE_ALGOLIA_INDEX_NAME;
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  return isMobile;
-}
+
 
 function CustomHits() {
   const { hits } = useHits();
