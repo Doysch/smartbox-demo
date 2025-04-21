@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../App.css';
-import { useRef } from 'react';
-import useClickOutside from '../hooks/useClickOutside';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useRef } from "react";
+import useClickOutside from "../hooks/useClickOutside";
+import "../App.css";
 
 const experiences = [
   "Séjours",
@@ -16,7 +16,7 @@ export default function ExperienceDropdown() {
   const [open, setOpen] = useState(false);
 
   const dropdownRef = useRef();
-useClickOutside(dropdownRef, () => setOpen(false));
+  useClickOutside(dropdownRef, () => setOpen(false));
 
   return (
     <div className="category-dropdown-wrapper" ref={dropdownRef}>
@@ -28,10 +28,12 @@ useClickOutside(dropdownRef, () => setOpen(false));
         <ul className="category-dropdown-menu">
           {experiences.map((cat) => (
             <li key={cat}>
-              <Link to={`/experiences/${encodeURIComponent(cat)}`} className="category-link">
+              <Link
+                to={`/experiences/${encodeURIComponent(cat)}`}
+                className="category-link"
+              >
                 {cat}
               </Link>
-              
             </li>
           ))}
         </ul>

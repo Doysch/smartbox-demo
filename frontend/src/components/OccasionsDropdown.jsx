@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css';
 import { useRef } from 'react';
 import useClickOutside from '../hooks/useClickOutside';
+import '../App.css';
 
 const occasions = [
   "Anniversaire",
@@ -10,7 +10,6 @@ const occasions = [
   "Départ",
   "Retraite",
   "Félicitations"
-  // ...add others from your data
 ];
 
 export default function OccasionsDropdown() {

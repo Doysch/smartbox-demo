@@ -1,4 +1,4 @@
-/* App.css - plain CSS styling for clean search layout */
+/* App.css */
 
 body {
   margin: 0;
@@ -13,7 +13,7 @@ body {
   flex-direction: column;
 }
 
-/* Header layout: logo, search, nav */
+/* Header layout */
 .search-header {
   display: grid;
   grid-template-areas:
@@ -65,7 +65,7 @@ body {
   font-size: 1.2rem;
 }
 
-/* Grid layout for hits */
+/* Hits Grid layout */
 .hits-container {
   max-width: 1200px;
   margin: 2rem auto;
@@ -137,7 +137,7 @@ body {
   color: #555;
 }
 
-/* New styles for rating section */
+/* Hit Rating styles */
 .hit-rating {
   display: flex;
   align-items: center;
@@ -175,26 +175,22 @@ body {
 .hit-meta-item.people-icon {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem; /* spacing between icon and text */
-  white-space: nowrap; /* prevents breaking onto new line */
+  gap: 0.4rem; 
+  white-space: nowrap; 
 }
 
 .hit-meta-item.people-icon span {
   display: -webkit-box;
-  display: box; /* fallback for older specs */
+  display: box; 
   -webkit-box-orient: vertical;
   box-orient: vertical;
   overflow: hidden;
-
-  /* NEW: standard & prefixed line clamping */
   line-clamp: 2;
   -webkit-line-clamp: 2;
-
-  /* Optional: if you want to prevent word-breaking mid-word */
-  word-break: break-word;
+ word-break: break-word;
 }
 
-/* Discount section */
+
 
 
 /* Price */
@@ -266,7 +262,6 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Headings (previously .refinement-panel h4) */
 .ais-Panel-header {
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
@@ -274,28 +269,14 @@ body {
   font-weight: 600;
   color: #333;
 }
-/* .refinement-panel {
-  flex: 0 0 250px;
-  font-size: 0.95rem;
-  color: #333;
-} */
 
-/* Headings */
-/* .refinement-panel h4 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  font-size: 1rem;
-  font-weight: 600;
-} */
 
-/* Algolia refinement list root */
 .ais-RefinementList {
   list-style: none;
   padding: 0;
   margin: 0 0 1.5rem;
 }
 
-/* Refinement item container */
 .ais-RefinementList-item {
   display: flex;
   align-items: center;
@@ -304,12 +285,10 @@ body {
   font-size: 0.95rem;
 }
 
-/* Checkbox styling */
 .ais-RefinementList-checkbox {
   margin-right: 0.5rem;
 }
 
-/* Label without bullets */
 .ais-RefinementList-label {
   display: flex;
   align-items: center;
@@ -317,7 +296,6 @@ body {
   flex: 1;
 }
 
-/* Facet label text */
 .ais-RefinementList-labelText {
   flex-grow: 1;
   white-space: nowrap;
@@ -335,7 +313,7 @@ body {
 .ais-RefinementList-showMore {
   background: none;
   border: none;
-  color: #d23f3f; /* Smartbox red */
+  color: #d23f3f; 
   font-weight: 600;
   font-size: 0.875rem;
   cursor: pointer;
@@ -383,7 +361,6 @@ body {
 
 /* Pagination */
 
-/* Space between each refinement block */
 
 
 .pagination-container {
@@ -501,7 +478,7 @@ body {
   gap: 1rem;
   justify-content: center;
   align-items: flex-start;
-  margin-top: 0.5rem; /* was 1rem */
+  margin-top: 0.5rem; 
   padding: 0 1rem;
 }
 
@@ -536,14 +513,11 @@ body {
 
 /* Platform Dropdown */
 
-/* Platform dropdown (styled like Persona) */
 .platform-dropdown-wrapper {
   grid-area: platform;
   display: none;
 
 }
-
-
 
 
 .platform-select {
@@ -642,6 +616,7 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Box Experiences */
 
 .experience-cards-grid {
   display: grid;
@@ -988,21 +963,19 @@ body {
 
 }
 
-/* END OF MEDIANQUERY */
+
 
 /* Autocomplete */
 
-/* 🔍 Autocomplete result item layout */
 
-/* Style the autocomplete container */
 .autocomplete-wrapper {
   width: 100%;
   max-width: 700px;
-  position: relative; /* ✨ make this always the context */
+  position: relative;  
 
 }
 
-/* 👀 MAIN AUTOCOMPLETE CONTAINER */
+
 .aa-Autocomplete {
   width: 100%;
   display: flex;
@@ -1012,10 +985,10 @@ body {
   outline: none;
 }
 
-/* 🎯 ONLY STYLE FORM (the actual box) */
+/* Aurtcomplete Searchbox */
 .aa-Form {
-  border: 1px solid #ccc; /* light grey */
-  border-radius: 999px;   /* max pill shape */
+  border: 1px solid #ccc; 
+  border-radius: 999px;  
   background-color: #fff;
   padding: 0.5rem 1rem;
   display: flex;
@@ -1040,8 +1013,7 @@ body {
 }
 
 
-
-/* 🧠 INPUT ITSELF */
+/* Search input  */
 .aa-Input {
   flex: 1;
   border: none;
@@ -1061,16 +1033,16 @@ body {
   color: #999;
 }
 
-/* 🔍 Search icon */
+/*  Search icon */
 .aa-SubmitButton {
   background: none;
   border: none;
-  color: #f0543c;  /* Smartbox red */
+  color: #f0543c; 
   padding: 0 0.5rem;
   cursor: pointer;
 }
 
-/* ❌ Clear button */
+
 .aa-ClearButton {
   background: none;
   border: none;
@@ -1089,7 +1061,7 @@ body {
   color: #f0543c;
 }
 
-/* 🔽 Dropdown layout and result items */
+
 .autocomplete-box-item {
   display: flex;
   align-items: center;
@@ -1109,7 +1081,7 @@ body {
   font-weight: 500;
 }
 
-/* 🔥 Dropdown panel styling */
+/*  Dropdown panels */
 .aa-Panel {
   width: 60vw !important;
   max-width: 900px;
@@ -1119,7 +1091,7 @@ body {
   transform: translateX(-50%);
 }
 
-/* Panel layout */
+
 .aa-PanelSections,
 .two-column-panel > .aa-PanelLayout {
   display: flex;
@@ -1160,8 +1132,8 @@ body {
 /* 🔁 Strong override for autocomplete styles */
 
 .aa-Autocomplete .aa-Form {
-  border: 1px solid #ddd !important;               /* Lighter grey */
-  border-radius: 999px !important;                 /* Full pill */
+  border: 1px solid #ddd !important;               
+  border-radius: 999px !important;                
   background: #fff !important;
   padding: 0.5rem 1rem !important;
   box-shadow: none !important;
@@ -1189,12 +1161,12 @@ body {
 }
 
 .aa-Autocomplete .aa-SubmitButton {
-  color: #f0543c !important; /* Smartbox red */
+  color: #f0543c !important; 
 }
 
 .aa-Autocomplete .aa-SubmitButton .aa-SubmitIcon {
   color: #f0543c !important;
-  fill: #f0543c !important; /* just to be safe for inline SVG */
+  fill: #f0543c !important; 
 }
 
 .aa-Autocomplete .aa-ClearButton:hover {
@@ -1217,7 +1189,7 @@ body {
 
 .trending-carousel-wrapper {
   display: flex;
-  justify-content: center; /* ✅ center the carousel and arrows */
+  justify-content: center; 
   align-items: center;
   gap: 0.75rem;
 }

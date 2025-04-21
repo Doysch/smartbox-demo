@@ -1,5 +1,3 @@
-// src/pages/CategoryPage.jsx
-
 import {
   InstantSearch,
   Configure,
@@ -54,8 +52,8 @@ export default function CategoryPage() {
           </Link>
 
           <div className="search-wrapper">
-  <SearchWrapper />
-</div>
+            <SearchWrapper />
+          </div>
 
           <div className="nav-icons">
             <div className="nav-item">

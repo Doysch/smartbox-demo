@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { algoliasearch } from "algoliasearch";
 import { useInstantSearch } from "react-instantsearch";
-import { useIsMobile } from "../hooks/useIsMobile"; // adjust path if needed
+import { useIsMobile } from "../hooks/useIsMobile";
 
 const recommendClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -18,9 +18,9 @@ function truncateTitle(title, wordLimit = 4) {
 }
 
 export default function TrendingItems() {
-  const isMobile = useIsMobile(); // 👈 hook here
+  const isMobile = useIsMobile(); // hook for mobile detection
 
-  const { uiState } = useInstantSearch(); // ✅ inside the component
+  const { uiState } = useInstantSearch();
   const [trendingHits, setTrendingHits] = useState([]);
 
   const currentState = uiState?.[indexName] || {};
@@ -30,7 +30,6 @@ export default function TrendingItems() {
 
   useEffect(() => {
     if (isMobile || query.trim() !== "" || hasPersona) return;
-
 
     recommendClient
       .getRecommendations({
@@ -49,11 +48,11 @@ export default function TrendingItems() {
         ],
       })
       .then((res) => {
-        console.log("🔥 Trending hits response:", res);
+        // console.log("Trending hits:", res);
         setTrendingHits(res.results[0].hits || []);
       })
       .catch((err) => {
-        console.error("❌ Error fetching trending items:", err);
+        console.error("Error fetching trending items:", err);
       });
   }, [query, hasPersona]);
 

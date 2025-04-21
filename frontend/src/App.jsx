@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { algoliasearch } from "algoliasearch";
 import {
@@ -6,7 +5,7 @@ import {
   Configure,
   Pagination,
   Stats,
-  SortBy
+  SortBy,
 } from "react-instantsearch";
 import "./App.css";
 import smartboxLogo from "./images/smartbox-logo.png";
@@ -24,13 +23,8 @@ import PlatformDropdown from "./components/PlatformDropdown";
 import { history } from "instantsearch.js/es/lib/routers";
 import { singleIndex } from "instantsearch.js/es/lib/stateMappings";
 import SearchWrapper from "./components/SearchWrapper";
-import { connectSearchBox } from "instantsearch.js/es/connectors";
 import TrendingItems from "./components/TrendingItems";
-import { useInstantSearch } from "react-instantsearch";
-import { useIsMobile } from "./hooks/useIsMobile"; // adjust path if needed
-
-
-const VirtualSearchBoxWidget = connectSearchBox(() => null);
+import { useIsMobile } from "./hooks/useIsMobile";
 
 const searchClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -38,8 +32,6 @@ const searchClient = algoliasearch(
 );
 
 const indexName = import.meta.env.VITE_ALGOLIA_INDEX_NAME;
-
-
 
 function CustomHits() {
   const { hits } = useHits();
@@ -71,11 +63,11 @@ export default function App() {
   };
 
   const personaToContextMap = {
-"Thrill Seeker": "thrill-seeker",
-  Foodie: "foodie",
-  "Wellness Seeker": "wellness-seeker",
-  Stay: "stay",
-};
+    "Thrill Seeker": "thrill-seeker",
+    Foodie: "foodie",
+    "Wellness Seeker": "wellness-seeker",
+    Stay: "stay",
+  };
 
   const handleLogoClick = () => {
     if (logoClickHandlerRef.current) {
@@ -100,7 +92,7 @@ export default function App() {
               onLogoClick={(cb) => (logoClickHandlerRef.current = cb)}
             />
           </div>
-
+{/* Nav section */}
           <div className="nav-group">
             <div className="nav-icons">
               <div className="nav-item">
@@ -117,6 +109,8 @@ export default function App() {
 
           <PlatformDropdown onChange={setPlatform} />
         </header>
+
+{/* Trending Items & Category dropdowns */}
         {<TrendingItems />}
 
         <div className="dropdowns-row">
@@ -129,7 +123,10 @@ export default function App() {
         <main className="main-content">
           {isMobile ? (
             <div className="refinement-toggle-wrapper">
-              <button className="toggle-filters-btn secondary-toggle" onClick={() => setShowFilters(!showFilters)}>
+              <button
+                className="toggle-filters-btn secondary-toggle"
+                onClick={() => setShowFilters(!showFilters)}
+              >
                 {showFilters ? "Masquer les filtres" : "Afficher les filtres"}
               </button>
               {showFilters && <RefinementPanel />}
@@ -137,36 +134,36 @@ export default function App() {
           ) : (
             <RefinementPanel />
           )}
-
+{/* Sort by & Hits */}
           <div className="content-area">
             <div className="results-header">
-            <Stats
-              translations={{
-                rootElementText({ nbHits, processingTimeMS }) {
-                  return `Résultats ${nbHits.toLocaleString(
-                    "fr-FR"
-                  )}, trouvés en ${processingTimeMS}ms`;
-                },
-              }}
-            />
-             <SortBy
-      items={[
-        { label: "Pertinence", value: indexName },
-        {
-          label: "Prix croissant",
-          value: `${indexName}_price_asc`,
-        },
-        {
-          label: "Prix décroissant",
-          value: `${indexName}_price_desc`,
-        },
-        {
-          label: "Meilleures notes",
-          value: `${indexName}_rating_desc`,
-        },
-      ]}
-      defaultRefinement={indexName}
-    />
+              <Stats
+                translations={{
+                  rootElementText({ nbHits, processingTimeMS }) {
+                    return `Résultats ${nbHits.toLocaleString(
+                      "fr-FR"
+                    )}, trouvés en ${processingTimeMS}ms`;
+                  },
+                }}
+              />
+              <SortBy
+                items={[
+                  { label: "Pertinence", value: indexName },
+                  {
+                    label: "Prix croissant",
+                    value: `${indexName}_price_asc`,
+                  },
+                  {
+                    label: "Prix décroissant",
+                    value: `${indexName}_price_desc`,
+                  },
+                  {
+                    label: "Meilleures notes",
+                    value: `${indexName}_rating_desc`,
+                  },
+                ]}
+                defaultRefinement={indexName}
+              />
             </div>
             <CustomHits />
             <Pagination />

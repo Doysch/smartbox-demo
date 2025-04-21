@@ -1,4 +1,3 @@
-// src/components/Panel.jsx
 export default function Panel({ header, children }) {
     return (
       <div className="ais-Panel">

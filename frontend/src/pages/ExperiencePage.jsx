@@ -54,8 +54,8 @@ export default function ExperiencePage() {
           </Link>
 
           <div className="search-wrapper">
-  <SearchWrapper />
-</div>
+            <SearchWrapper />
+          </div>
 
           <div className="nav-icons">
             <div className="nav-item">

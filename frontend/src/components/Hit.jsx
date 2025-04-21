@@ -1,4 +1,3 @@
-// src/components/Hit.jsx
 import React from "react";
 import { Star } from "lucide-react";
 
@@ -20,12 +19,13 @@ const Hit = ({ hit, onBoxClick }) => {
   const activityText = experienceMeta || "1 activité pour 1 ou 2 personnes";
 
   return (
-    <div className="hit-card"
-    onClick={() => onBoxClick?.(hit)} // 👈 Trigger modal if callback exists
-    role="button"
+    <div
+      className="hit-card"
+      onClick={() => onBoxClick?.(hit)} 
+      role="button"
       tabIndex={0}
-      onKeyDown={(e) => e.key === "Enter" && onBoxClick?.(hit)} // 👈 A11y
->
+      onKeyDown={(e) => e.key === "Enter" && onBoxClick?.(hit)} 
+    >
       <div
         className="hit-image-wrapper"
         style={{ backgroundImage: `url(${imageUrl || hit.lengowImage || ""})` }}
@@ -81,7 +81,7 @@ const Hit = ({ hit, onBoxClick }) => {
           </div>
         )}
 
-        {/* Meta info (people / location / delivery) */}
+        {/* activity indo */}
         <div className="hit-meta">
           <div className="hit-meta-item people-icon">
             <img
