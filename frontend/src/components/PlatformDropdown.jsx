@@ -1,11 +1,9 @@
-// src/components/PlatformDropdown.jsx
 import React from "react";
 import "../App.css";
 
 export default function PlatformDropdown({ onChange }) {
   return (
     <div className="platform-dropdown-wrapper">
-      
       <select
         id="platform-select"
         onChange={(e) => onChange(e.target.value)}
