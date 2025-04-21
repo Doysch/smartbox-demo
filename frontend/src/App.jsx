@@ -130,7 +130,7 @@ export default function App() {
         <main className="main-content">
           {isMobile ? (
             <div className="refinement-toggle-wrapper">
-              <button onClick={() => setShowFilters(!showFilters)}>
+              <button className="toggle-filters-btn secondary-toggle" onClick={() => setShowFilters(!showFilters)}>
                 {showFilters ? "Masquer les filtres" : "Afficher les filtres"}
               </button>
               {showFilters && <RefinementPanel />}
