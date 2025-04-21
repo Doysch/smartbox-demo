@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { algoliasearch } from "algoliasearch";
 import { useInstantSearch } from "react-instantsearch";
+import { useIsMobile } from "../hooks/useIsMobile"; // adjust path if needed
 
 const recommendClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
@@ -17,6 +18,8 @@ function truncateTitle(title, wordLimit = 4) {
 }
 
 export default function TrendingItems() {
+  const isMobile = useIsMobile(); // 👈 hook here
+
   const { uiState } = useInstantSearch(); // ✅ inside the component
   const [trendingHits, setTrendingHits] = useState([]);
 
@@ -26,7 +29,8 @@ export default function TrendingItems() {
   const hasPersona = ruleContexts.some((ctx) => ctx.startsWith("persona-"));
 
   useEffect(() => {
-    if (query.trim() !== "" || hasPersona) return;
+    if (isMobile || query.trim() !== "" || hasPersona) return;
+
 
     recommendClient
       .getRecommendations({
