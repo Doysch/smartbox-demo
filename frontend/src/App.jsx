@@ -25,6 +25,10 @@ import { history } from "instantsearch.js/es/lib/routers";
 import { singleIndex } from "instantsearch.js/es/lib/stateMappings";
 import SearchWrapper from "./components/SearchWrapper";
 import { connectSearchBox } from "instantsearch.js/es/connectors";
+import TrendingItems from "./components/TrendingItems";
+import { useInstantSearch } from "react-instantsearch";
+
+
 const VirtualSearchBoxWidget = connectSearchBox(() => null);
 
 const searchClient = algoliasearch(
@@ -120,6 +124,8 @@ export default function App() {
 
           <PlatformDropdown onChange={setPlatform} />
         </header>
+        {<TrendingItems />}
+
         <div className="dropdowns-row">
           <CategoryDropdown />
           <ExperienceDropdown />
