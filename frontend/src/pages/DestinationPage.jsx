@@ -55,8 +55,8 @@ export default function DestinationPage() {
           </div>
 
           <div className="search-wrapper">
-  <SearchWrapper />
-</div>
+            <SearchWrapper />
+          </div>
 
           <div className="nav-icons">
             <div className="nav-item">

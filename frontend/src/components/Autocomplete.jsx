@@ -1,4 +1,3 @@
-// src/components/Autocomplete.jsx
 import React, { useEffect, useRef } from "react";
 import { algoliasearch } from "algoliasearch";
 import { autocomplete } from "@algolia/autocomplete-js";
@@ -27,8 +26,8 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
       plugins: [],
       placeholder: "Recherchez une expérience...",
       openOnFocus: true,
-      detachedMediaQuery: 'none',
-      initialState: { query: initialQuery }, 
+      detachedMediaQuery: "none",
+      initialState: { query: initialQuery },
       classNames: {
         panel: "aa-Panel two-column-panel",
       },
@@ -39,11 +38,10 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
           onSearchSubmit(query);
         }
       },
-       // ✅ Fires when clicking ❌ (clear)
-  onReset() {
-    onSearchSubmit("");
-  },
-      
+      onReset() {
+        onSearchSubmit("");
+      },
+
       getSources({ query }) {
         return [
           {
@@ -63,9 +61,9 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
               },
             },
             onSelect({ item, setIsOpen }) {
-                onSearchSubmit(item.label);
-                setIsOpen(false);
-              },
+              onSearchSubmit(item.label);
+              setIsOpen(false);
+            },
           },
           {
             sourceId: "querySuggestions",
@@ -78,7 +76,7 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
                 queries: [
                   {
                     indexName: "smartbox_boxes_CH-fr_query_suggestions",
-                    query: query || "", // fallback to empty string if no input
+                    query: query || "", // fallback 
                     params: {
                       hitsPerPage: 5,
                     },
@@ -95,9 +93,9 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
               },
             },
             onSelect({ item, setIsOpen }) {
-                onSearchSubmit(item.query);
-                setIsOpen(false); // Optional: close the dropdown
-              },
+              onSearchSubmit(item.query);
+              setIsOpen(false); // close dropdown
+            },
           },
           {
             sourceId: "boxes",
