@@ -23,6 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 
-files
-# /scripts 
-# objectIDs.txt
+
+
+scripts/
+
+# Env files
+.env
+/frontend/.env
