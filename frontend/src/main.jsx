@@ -6,11 +6,14 @@ import CategoryPage from './pages/CategoryPage.jsx';
 import OccasionPage from './pages/OccasionPage.jsx';
 import DestinationPage from './pages/DestinationPage.jsx';
 import ExperiencePage from './pages/ExperiencePage.jsx';
+import { HashRouter } from "react-router-dom";
+
 import './App.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
+
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/experiences/:categoryId" element={<ExperiencePage />} />
@@ -19,6 +22,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/categories/:categoryId" element={<CategoryPage />} />
 
       </Routes>
-    </BrowserRouter>
+      </HashRouter>
   </React.StrictMode>
 );
