@@ -1,9 +1,7 @@
-// src/components/TrendingItems.jsx
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { algoliasearch } from "algoliasearch";
 import { useInstantSearch } from "react-instantsearch";
 
-// 🔐 Init Recommend manually
 const recommendClient = algoliasearch(
   import.meta.env.VITE_ALGOLIA_APP_ID,
   import.meta.env.VITE_ALGOLIA_RECOMMEND_API_KEY
@@ -19,12 +17,16 @@ function truncateTitle(title, wordLimit = 4) {
 }
 
 export default function TrendingItems() {
+  const { uiState } = useInstantSearch(); // ✅ inside the component
   const [trendingHits, setTrendingHits] = useState([]);
-  const { uiState } = useInstantSearch();
-const query = uiState?.[indexName]?.query || "";
+
+  const currentState = uiState?.[indexName] || {};
+  const query = currentState.query || "";
+  const ruleContexts = currentState.ruleContexts || [];
+  const hasPersona = ruleContexts.some((ctx) => ctx.startsWith("persona-"));
 
   useEffect(() => {
-    if (query.trim() !== "") return;
+    if (query.trim() !== "" || hasPersona) return;
 
     recommendClient
       .getRecommendations({
@@ -49,9 +51,9 @@ const query = uiState?.[indexName]?.query || "";
       .catch((err) => {
         console.error("❌ Error fetching trending items:", err);
       });
-  }, [query]);
+  }, [query, hasPersona]);
 
-  if (query.trim() !== "" || !trendingHits.length) return null;
+  if (query.trim() !== "" || hasPersona || !trendingHits.length) return null;
 
   return (
     <section className="trending-section">
@@ -79,7 +81,7 @@ const query = uiState?.[indexName]?.query || "";
                 />
                 <p className="trending-box-title">
                   {truncateTitle(hit.webTitle)}
-                </p>{" "}
+                </p>
                 {rating && (
                   <p className="trending-rating">⭐ {Math.round(rating)}</p>
                 )}
