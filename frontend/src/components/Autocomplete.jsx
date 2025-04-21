@@ -27,6 +27,7 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
       plugins: [],
       placeholder: "Recherchez une expérience...",
       openOnFocus: true,
+      detachedMediaQuery: 'none',
       initialState: { query: initialQuery }, 
       classNames: {
         panel: "aa-Panel two-column-panel",
