@@ -85,7 +85,7 @@ const Hit = ({ hit, onBoxClick }) => {
         <div className="hit-meta">
           <div className="hit-meta-item people-icon">
             <img
-              src="/icons/users.svg"
+              src={`${import.meta.env.BASE_URL}icons/users.svg`}
               alt="people icon"
               width={16}
               height={16}
