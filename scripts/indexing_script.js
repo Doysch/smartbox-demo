@@ -19,8 +19,8 @@ function camelCaseKeys(obj) {
 }
 
 // Setup Algolia client
-const client = algoliasearch('OA5TOH2VFB', '1307bdf251dda94acafc6c97072d4144');
-const index = client.initIndex('smartbox_boxes_ES-es');
+const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_API_KEY);
+const index = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
 // Load and camelCase all records
 const rawRecords = JSON.parse(fs.readFileSync('data/processed/ES-es.final.json', 'utf8'));
