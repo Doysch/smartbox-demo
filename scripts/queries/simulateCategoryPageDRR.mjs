@@ -1,12 +1,13 @@
 // scripts/queries/simulateCategoryPageDRR.js
 import algoliasearch from "algoliasearch";
 import { v4 as uuidv4 } from "uuid";
+require('dotenv').config();
 
-const appId = "OA5TOH2VFB";
-const searchApiKey = "d40e78f30117a2d30a5d851eacd30140";
-const insightsApiKey = "d40e78f30117a2d30a5d851eacd30140";
-const indexName = "smartbox_boxes_CH-fr";
-const categoryFilter = "filters.pays:Italie";
+
+const appId = process.env.ALGOLIA_APP_ID;
+const searchApiKey = process.env.ALGOLIA_SEARCH_API_KEY
+const indexName = "indexName"; // Replace with your index name
+const categoryFilter = "facetName.facetValue";  // Replace with your filter
 
 const objectIDs = [
   "121944001",
@@ -49,7 +50,7 @@ async function sendEvent(event) {
     const res = await fetch("https://insights.algolia.io/1/events", {
       method: "POST",
       headers: {
-        "X-Algolia-API-Key": insightsApiKey,
+        "X-Algolia-API-Key": searchApiKey,
         "X-Algolia-Application-Id": appId,
         "Content-Type": "application/json",
       },
@@ -58,16 +59,16 @@ async function sendEvent(event) {
 
     if (!res.ok) {
       const error = await res.json();
-      console.error("❌ Event error:", error);
+      console.error("Event error:", error);
     } else {
       console.log(
-        `✅ ${event.eventType.toUpperCase()} ${event.eventName} sent for ${
+        `${event.eventType.toUpperCase()} ${event.eventName} sent for ${
           event.userToken
         }`
       );
     }
   } catch (err) {
-    console.error("❌ Failed to send event:", err);
+    console.error("Failed to send event:", err);
   }
 }
 
@@ -89,7 +90,7 @@ async function simulate() {
 
     const queryID = searchRes?.queryID;
     if (!queryID) {
-      console.error("❌ No queryID returned");
+      console.error("No queryID returned");
       continue;
     }
 
@@ -151,7 +152,7 @@ async function simulate() {
       await sleep(150);
     }
 
-    console.log(`🔁 Done: ${i + 1}/${numQueries} for ${userToken}\n`);
+    console.log(`Done: ${i + 1}/${numQueries} for ${userToken}\n`);
     await sleep(1000);
   }
 }
