@@ -34,9 +34,6 @@ dist-ssr
 *.sw?
 
 
-
-scripts/
-
 # Env files
 .env
 /frontend/.env
