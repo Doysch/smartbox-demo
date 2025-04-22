@@ -1,7 +1,9 @@
 const algoliasearch = require('algoliasearch');
+require('dotenv').config();
 
-const client = algoliasearch('OA5TOH2VFB', '1307bdf251dda94acafc6c97072d4144');
-const index = client.initIndex('smartbox_boxes_CH-fr');
+
+const client = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_API_KEY);
+const index = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
 async function run() {
   try {
