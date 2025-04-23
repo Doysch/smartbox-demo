@@ -2,7 +2,7 @@ import {
   InstantSearch,
   Configure,
   Pagination,
-  Stats,
+  Stats
 } from "react-instantsearch";
 import { useParams } from "react-router-dom";
 import { algoliasearch } from "algoliasearch";
@@ -14,7 +14,6 @@ import ExperienceDropdown from "../components/ExperienceDropdown";
 import OccasionsDropdown from "../components/OccasionsDropdown";
 import DestinationsDropdown from "../components/DestinationsDropdown";
 import CategoryDropdown from "../components/CategoryDropdown";
-import SearchWrapper from "../components/SearchWrapper";
 import "../App.css";
 
 const searchClient = algoliasearch(
@@ -46,13 +45,9 @@ export default function DestinationPage() {
         future={{ preserveSharedStateOnUnmount: true }}
       >
         <header className="search-header">
-          <div className="logo">
-            <img
-              src={smartboxLogo}
-              alt="Smartbox Logo"
-              onClick={() => (window.location.href = "/")}
-            />
-          </div>
+          <Link to="/" className="logo">
+            <img src={smartboxLogo} alt="Smartbox Logo" />
+          </Link>
 
           <div className="search-wrapper">
             <SearchWrapper />
@@ -86,17 +81,6 @@ export default function DestinationPage() {
             <RefinementPanel />
           </div>
           <div className="content-area">
-            <div className="stats-wrapper">
-              <Stats
-                translations={{
-                  rootElementText({ nbHits, processingTimeMS }) {
-                    return `Résultats ${nbHits.toLocaleString(
-                      "fr-FR"
-                    )} trouvés en ${processingTimeMS}ms`;
-                  },
-                }}
-              />
-            </div>
             <CustomHits />
             <div className="pagination-container">
               <Pagination />
