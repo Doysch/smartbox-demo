@@ -14,6 +14,9 @@ import ExperienceDropdown from "../components/ExperienceDropdown";
 import OccasionsDropdown from "../components/OccasionsDropdown";
 import DestinationsDropdown from "../components/DestinationsDropdown";
 import CategoryDropdown from "../components/CategoryDropdown";
+import { Link } from "react-router-dom";
+import SearchWrapper from "../components/SearchWrapper";
+
 import "../App.css";
 
 const searchClient = algoliasearch(
