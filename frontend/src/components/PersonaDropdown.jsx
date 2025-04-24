@@ -19,7 +19,6 @@ export default function PersonaDropdown({ onChange }) {
         <option value="Thrill Seeker">Aventurier</option>
         <option value="Foodie">Gourmand</option>
         <option value="Wellness Seeker">Bien-être</option>
-        <option value="Family">Famille</option>
       </select>
     </div>
   );
