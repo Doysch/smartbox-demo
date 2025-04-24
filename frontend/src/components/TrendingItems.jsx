@@ -17,7 +17,13 @@ function truncateTitle(title, wordLimit = 4) {
     : title;
 }
 
-export default function TrendingItems() {
+const personaToExp = {
+  "Thrill Seeker": 'categories.lvl0:"Adventure"',
+  "Foodie": 'categories.lvl1:"Gastronomy > Michelin"',
+  "Wellness Seeker": 'categories.lvl0:"Stay Wellness"',
+};
+
+export default function TrendingItems({ persona }) {
   const isMobile = useIsMobile(); // hook for mobile detection
 
   const { uiState } = useInstantSearch();
@@ -25,11 +31,28 @@ export default function TrendingItems() {
 
   const currentState = uiState?.[indexName] || {};
   const query = currentState.query || "";
-  const ruleContexts = currentState.ruleContexts || [];
-  const hasPersona = ruleContexts.some((ctx) => ctx.startsWith("persona-"));
+  // const ruleContexts = currentState.ruleContexts || [];
+  // const hasPersona = ruleContexts.some((ctx) => ctx.startsWith("persona-"));
 
   useEffect(() => {
-    if (isMobile || query.trim() !== "" || hasPersona) return;
+    if (isMobile || query.trim() !== "") return;
+
+    // Clear old hits while we fetch new ones
+    setTrendingHits([]);
+
+    // Build filters string only when a persona exists
+    const filters = persona ? personaToExp[persona] : undefined;
+
+    // console.log({ persona, filters, query, isMobile });
+
+    // add persona-specific fallback
+
+const fallback =
+  persona === 'Wellness Seeker'
+    ? { filters: 'categories.lvl1:"Stay Wellness > Spa"' }
+  : persona === 'Foodie'
+    ? { filters: 'categories.lvl0:"Gastronomy"' }
+  : {};
 
     recommendClient
       .getRecommendations({
@@ -39,11 +62,8 @@ export default function TrendingItems() {
             model: "trending-items",
             maxRecommendations: 5,
             threshold: 0,
-            facetName: "categoryPageId",
-            facetValue: "Wellness",
-            fallbackParameters: {
-              facetFilters: [["categoryPageId:Wellness"]],
-            },
+            queryParameters: filters ? { filters } : {},
+            fallbackParameters: fallback
           },
         ],
       })
@@ -54,18 +74,18 @@ export default function TrendingItems() {
       .catch((err) => {
         console.error("Error fetching trending items:", err);
       });
-  }, [query, hasPersona]);
+  }, [query, persona, isMobile]);
 
-  if (query.trim() !== "" || hasPersona || !trendingHits.length) return null;
+  if (query.trim() !== "" || !trendingHits.length) return null;
 
   return (
     <section className="trending-section">
-      <h2 className="trending-title">✨ Recommandé pour vous</h2>
+      <h2 className="trending-title">✨ Recommandé pour vous ✨</h2>
 
       <div className="trending-carousel-wrapper">
-        <button className="carousel-arrow" disabled>
+        {/* <button className="carousel-arrow" disabled>
           ←
-        </button>
+        </button> */}
 
         <div className="trending-carousel">
           {trendingHits.map((hit) => {
@@ -93,9 +113,9 @@ export default function TrendingItems() {
           })}
         </div>
 
-        <button className="carousel-arrow" disabled>
+        {/* <button className="carousel-arrow" disabled>
           →
-        </button>
+        </button> */}
       </div>
     </section>
   );

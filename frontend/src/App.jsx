@@ -112,7 +112,7 @@ export default function App() {
         </header>
 
 {/* Trending Items & Category dropdowns */}
-        {<TrendingItems />}
+        {<TrendingItems persona={persona} />}
 
         <div className="dropdowns-row">
           <CategoryDropdown />
