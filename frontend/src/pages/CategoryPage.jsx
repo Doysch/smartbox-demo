@@ -87,9 +87,9 @@ export default function CategoryPage() {
               <Stats
                 translations={{
                   rootElementText({ nbHits, processingTimeMS }) {
-                    return `Résultats ${nbHits.toLocaleString(
+                    return ` ${nbHits.toLocaleString(
                       "fr-FR"
-                    )} trouvés en ${processingTimeMS}ms`;
+                    )} résultats, trouvés en ${processingTimeMS}ms`;
                   },
                 }}
               />
