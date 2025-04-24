@@ -84,6 +84,17 @@ export default function DestinationPage() {
             <RefinementPanel />
           </div>
           <div className="content-area">
+          <div className="stats-wrapper">
+            <Stats
+                translations={{
+                  rootElementText({ nbHits, processingTimeMS }) {
+                    return ` ${nbHits.toLocaleString(
+                      "fr-FR"
+                    )} résultats, trouvés en ${processingTimeMS}ms`;
+                  },
+                }}
+              />
+            </div>
             <CustomHits />
             <div className="pagination-container">
               <Pagination />
