@@ -23,7 +23,7 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
 
     const instance = autocomplete({
       container: "#autocomplete",
-      plugins: [],
+      plugins: [recentSearchesPlugin],
       placeholder: "Recherchez une expérience...",
       openOnFocus: true,
       detachedMediaQuery: "none",
@@ -34,7 +34,7 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
       onSubmit({ state }) {
         const query = state.query?.trim();
         if (query !== undefined) {
-          recentSearchesPlugin.data.addItem({ label: query });
+          // recentSearchesPlugin.data.addItem({ label: query });
           onSearchSubmit(query);
         }
       },
@@ -44,27 +44,27 @@ export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
 
       getSources({ query }) {
         return [
-          {
-            sourceId: "recentSearches",
-            classNames: {
-              section: "aa-Section--left",
-            },
-            getItems() {
-              return recentSearchesPlugin.data.getAll();
-            },
-            templates: {
-              header() {
-                return "Recherches récentes";
-              },
-              item({ item, html }) {
-                return html`<div>${item.label}</div>`;
-              },
-            },
-            onSelect({ item, setIsOpen }) {
-              onSearchSubmit(item.label);
-              setIsOpen(false);
-            },
-          },
+          // {
+          //   sourceId: "recentSearches",
+          //   classNames: {
+          //     section: "aa-Section--left",
+          //   },
+          //   getItems() {
+          //     return recentSearchesPlugin.data.getAll();
+          //   },
+          //   templates: {
+          //     header() {
+          //       return "Recherches récentes";
+          //     },
+          //     item({ item, html }) {
+          //       return html`<div>${item.label}</div>`;
+          //     },
+          //   },
+          //   onSelect({ item, setIsOpen }) {
+          //     onSearchSubmit(item.label);
+          //     setIsOpen(false);
+          //   },
+          // },
           {
             sourceId: "querySuggestions",
             classNames: {
