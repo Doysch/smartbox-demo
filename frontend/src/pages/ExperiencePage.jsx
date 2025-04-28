@@ -83,6 +83,8 @@ export default function ExperiencePage() {
             <RefinementPanel />
           </div>
           <div className="content-area">
+          <h1 className="category-page-title">{decodedCategory}</h1>
+
             <div className="stats-wrapper">
             <Stats
                 translations={{

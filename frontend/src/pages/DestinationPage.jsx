@@ -84,6 +84,8 @@ export default function DestinationPage() {
             <RefinementPanel />
           </div>
           <div className="content-area">
+          <h1 className="category-page-title">{destinationId}</h1>
+
           <div className="stats-wrapper">
             <Stats
                 translations={{
