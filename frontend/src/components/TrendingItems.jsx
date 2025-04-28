@@ -34,26 +34,21 @@ export default function TrendingItems({ persona }) {
   // const ruleContexts = currentState.ruleContexts || [];
   // const hasPersona = ruleContexts.some((ctx) => ctx.startsWith("persona-"));
 
+  const personaFallbacks = {
+    "Wellness Seeker": { filters: 'categories.lvl1:"Stay Wellness > Spa"' },
+    "Foodie": { filters: 'categories.lvl0:"Gastronomy"' },
+    "Thrill Seeker": { filters: 'categories.lvl0:"Adventure"' },
+    // "Adventurier": { filters: 'categories.lvl0:"Adventure"' },
+  };
+  
   useEffect(() => {
     if (isMobile || query.trim() !== "") return;
-
-    // Clear old hits while we fetch new ones
+  
     setTrendingHits([]);
-
-    // Build filters string only when a persona exists
+  
     const filters = persona ? personaToExp[persona] : undefined;
-
-    // console.log({ persona, filters, query, isMobile });
-
-    // add persona-specific fallback
-
-const fallback =
-  persona === 'Wellness Seeker'
-    ? { filters: 'categories.lvl1:"Stay Wellness > Spa"' }
-  : persona === 'Foodie'
-    ? { filters: 'categories.lvl0:"Gastronomy"' }
-  : {};
-
+    const fallback = persona ? personaFallbacks[persona] || {} : {};
+  
     recommendClient
       .getRecommendations({
         requests: [
@@ -68,7 +63,6 @@ const fallback =
         ],
       })
       .then((res) => {
-        // console.log("Trending hits:", res);
         setTrendingHits(res.results[0].hits || []);
       })
       .catch((err) => {
