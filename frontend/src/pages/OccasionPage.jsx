@@ -84,12 +84,12 @@ export default function OccasionPage() {
           </div>
           <div className="content-area">
             <div className="stats-wrapper">
-              <Stats
+            <Stats
                 translations={{
                   rootElementText({ nbHits, processingTimeMS }) {
-                    return `Résultats ${nbHits.toLocaleString(
+                    return ` ${nbHits.toLocaleString(
                       "fr-FR"
-                    )} trouvés en ${processingTimeMS}ms`;
+                    )} résultats, trouvés en ${processingTimeMS}ms`;
                   },
                 }}
               />
