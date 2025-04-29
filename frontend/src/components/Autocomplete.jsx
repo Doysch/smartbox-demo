@@ -13,6 +13,17 @@ const searchClient = algoliasearch(
 const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
   key: "smartbox-recent",
   limit: 3,
+  transformSource({ source }) {
+    return {
+      ...source,
+      templates: {
+        ...source.templates,
+        header() {
+          return "Recherches récentes";
+        },
+      },
+    };
+  },
 });
 
 export default function Autocomplete({ onSearchSubmit, initialQuery = "" }) {
